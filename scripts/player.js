@@ -25,8 +25,6 @@ const setLaserCase = function (pos) {
         laserCase.classList.add('laser');
     }
 
-
-    console.log(pos);
 }
 
 const shootMoving = function () {
@@ -42,7 +40,6 @@ const shootMoving = function () {
         }
         if (verifKill()) {
             const caseKill = verifKill();
-            console.log(caseKill);
             clearInterval(shoot)
             caseKill.classList.remove('alien', 'laser')
             /*caseKill.classList.add('explosion');*/
@@ -54,14 +51,9 @@ const shootMoving = function () {
         }
 
     }, 100);
-
     shoot;
 }
-
-
-
 //Player deplacements
-
 const setPlayerShip = function (pos) {
     playerCase = gameCase[pos]
     playerCase.classList.add('tireur');
@@ -77,7 +69,6 @@ setPlayerShip(246)
 // Player Controls
 
 window.addEventListener("keyup", (event) => {
-    console.log(event);
     if (event.code == 'Space') {
         shootMoving();
 
@@ -97,7 +88,6 @@ window.addEventListener("keyup", (event) => {
             playerPos--;
             removePlayerShip();
             setPlayerShip(playerPos)
-            console.log(playerPos);
         }
     }
 
@@ -114,6 +104,5 @@ window.addEventListener("keyup", (event) => {
         removePlayerShip();
         setPlayerShip(playerPos)
     }
-    console.log(playerPos);
 })
 
