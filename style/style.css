@@ -41,6 +41,12 @@ h4{
     background-position: center;
     background-size: contain;
 }
+.explosion {
+    background: url(../assets/explosion.gif);
+    transform: rotate(180deg);
+    background-position: center;
+    background-size: contain;
+}
 .alien {
     background: url(../assets/ennemies.png);
     background-position: center;
