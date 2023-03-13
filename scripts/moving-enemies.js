@@ -8,7 +8,7 @@ const ligne3 = ArrayCases.slice(34,45);
 function createAliens(){
     for (let index = 0; index < 12; index++) {
         ligne1[index].classList.add('alien');
-        ligne2[index].classList.add('alien');;
+        ligne2[index].classList.add('alien');
         ligne3[index].classList.add('alien');   
     }
 }

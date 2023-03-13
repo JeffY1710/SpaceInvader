@@ -1,15 +1,3 @@
-const gameGrid = document.querySelector('#grille');
-
-const generateGrid = function () {
-    for (let index = 0; index < 255; index++) {
-        const gameCase = document.createElement('div');
-        gameGrid.appendChild(gameCase);
-
-    }
-}
-
-generateGrid();
-
 // 17 longueurs lignes
 // 15 hauteur colonnes
 
@@ -19,6 +7,16 @@ let playerPos = 246
 let playerCase = gameCase[playerPos]
 playerCase.classList.add('tireur');
 
+let alien = gameCase[59]
+alien.classList.add('alien')
+let alien2 = gameCase[60]
+alien2.classList.add('alien')
+let alien3 = gameCase[58]
+alien3.classList.add('alien')
+
+const verifKill = () =>{
+    return (document.querySelector('#grille div.alien.laser'))
+}
 //Player shoot
 
 const setLaserCase= function (pos) {
@@ -49,11 +47,22 @@ const shootMoving = function(){
             laserPosMoving -= 17;
             setLaserCase(laserPosMoving)
         }
+        if (verifKill()) {
+            const caseKill = verifKill();
+            console.log('test');
+            clearInterval(shoot)
+            caseKill.classList.remove('alien', 'laser')
+            caseKill.classList.add('explosion');
+            setTimeout(() => {
+                caseKill.classList.remove('explosion')
+            }, 500);
+        }
         
     }, 100);
 
     shoot;
 }
+
 
 
 //Player deplacements
@@ -71,13 +80,16 @@ setPlayerShip(246)
 
 
 // Player Controls
-window.addEventListener("keydown", (event) => {
+
+window.addEventListener("keyup", (event) => {
+    
     if (event.code == 'Space') {
         shootMoving();
+
     }
 
     if (event.code == 'ArrowRight') {
-        if (playerPos + 1 != 255) {
+        if (!(playerCase.getAttribute('data') =='right')) {
             playerPos++;
             removePlayerShip();
             setPlayerShip(playerPos)
@@ -86,7 +98,7 @@ window.addEventListener("keydown", (event) => {
     }
 
     if (event.code == 'ArrowLeft') {
-        if (playerPos - 1 != 237) {
+        if (!(playerCase.getAttribute('data') =='left')) {
             playerPos--;
             removePlayerShip();
             setPlayerShip(playerPos)
