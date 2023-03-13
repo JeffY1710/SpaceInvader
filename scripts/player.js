@@ -10,12 +10,53 @@ const generateGrid = function () {
 
 generateGrid();
 
+// 17 longueurs lignes
+// 15 hauteur colonnes
+
 const gameCase = document.querySelectorAll('#grille div')
 
 let playerPos = 246
 let playerCase = gameCase[playerPos]
 playerCase.classList.add('tireur');
 
+//Player shoot
+
+const setLaserCase= function (pos) {
+
+    let laserCase = gameCase[pos];
+    const previousCase = gameCase[pos +17]
+    if (previousCase || pos < 0) {
+        previousCase.classList.remove('laser');
+    }
+    if (pos < 0) {
+        previousCase.classList.remove('laser');
+    }else{
+        laserCase.classList.add('laser');
+    }
+
+    
+    console.log(pos);
+}
+
+const shootMoving = function(){
+    let laserPosMoving = playerPos-17
+    setLaserCase(laserPosMoving)
+
+    const shoot = setInterval(() => {
+        if (laserPosMoving < 0) {
+            clearInterval(shoot)
+        }else{
+            laserPosMoving -= 17;
+            setLaserCase(laserPosMoving)
+        }
+        
+    }, 100);
+
+    shoot;
+}
+
+
+//Player deplacements
 
 const setPlayerShip = function (pos) {
     playerCase = gameCase[pos]
@@ -26,14 +67,13 @@ const removePlayerShip = function () {
     playerCase.classList.remove('tireur')
 }
 
+setPlayerShip(246)
 
-// 17 longueurs lignes
-// 15 hauteur colonnes
 
+// Player Controls
 window.addEventListener("keydown", (event) => {
-    console.log(event);
     if (event.code == 'Space') {
-
+        shootMoving();
     }
 
     if (event.code == 'ArrowRight') {
