@@ -1,20 +1,68 @@
+
 const allCases = document.querySelectorAll('#grille div');
-const ArrayCases = Array.from(allCases)
+let aliens = [  0,1,2,3,4,5,6,7,8,9,10,11,
+                17,18,19,20,21,22,23,24,25,26,27,28,
+                34,35,36,37,38,39,40,41,42,43,44,45];
+let dataRight = document.querySelectorAll("div[data='right']");
+let dataLeft = document.querySelectorAll("div[data='left']");
 
-const ligne1 = ArrayCases.slice(0,11);
-const ligne2 = ArrayCases.slice(17,28);
-const ligne3 = ArrayCases.slice(34,45);
+let direction = 1;
 
-function createAliens(){
-    for (let index = 0; index < 12; index++) {
-        ligne1[index].classList.add('alien');
-        ligne2[index].classList.add('alien');
-        ligne3[index].classList.add('alien');   
-    }
+function printAliens(){
+    aliens.forEach(e => {
+        allCases[e].classList.add('alien');
+    });
 }
 
-createAliens();
+function deleteAliens(){
+    aliens.forEach(e => {
+        allCases[e].classList.remove('alien');
+    });
+}
 
+function verifyRight(){  
+    dataRight.forEach(e => {
+        if(e.classList.contains('alien')){
+            deleteAliens();
+            move(17);
+            direction = -1;
+        }
+    });
+    printAliens();
+}
 
+function verifyLeft(){  
+    dataLeft.forEach(e => {
+        if(e.classList.contains('alien')){
+            deleteAliens();
+            move(17);
+            direction = 1;
+        }
+    });
+    printAliens();
+}
 
+function move(direction){
+    let index = 0;
+        aliens.forEach(e => {
+            aliens[index] += direction;
+            index++;
+        });
+}
 
+function main(){
+    deleteAliens();
+    move(direction);
+    printAliens();
+    setTimeout(() => {
+        verifyRight();
+    }, 500);
+    setTimeout(() => {
+        verifyLeft();
+    }, 500);
+}
+
+printAliens();
+    setInterval(()=>{
+    main();
+},1000)
