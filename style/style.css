@@ -1,4 +1,4 @@
-.grille {
+#grille {
     display: flex;
     flex-wrap: wrap;
     border: 1px solid #000;
@@ -6,8 +6,10 @@
     height: 500px;
     margin: 0 auto;
     box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    background: url(ressources/background-black.png);
+    background: url(../assets/background-black.png);
     animation: background-defile 5s linear infinite;
+    justify-content: center;
+    align-items: center;
 }
 
 @keyframes background-defile {
@@ -23,18 +25,19 @@ h3 {
     text-align: center;
     margin: 20px 0;
 }
-.grille div {
+#grille div {
     width: 25px;
     height: 25px;
+    border: 2px solid gray;
 }
 .tireur {
-    background: url(ressources/vaisseau.png);
+    background: url(../assets/vaisseau.png);
     transform: rotate(180deg);
     background-position: center;
     background-size: contain;
 }
 .alien {
-    background: url(ressources/ennemies.png);
+    background: url(../assets/ennemies.png);
     background-position: center;
     background-size: contain;
 }
