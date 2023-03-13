@@ -61,6 +61,7 @@ function verifKilled() {
 }
 
 function main(){
+    verifPlayerDefeat();
     verifKilled();
     deleteAliens();
     move(direction);
@@ -71,9 +72,24 @@ function main(){
     setTimeout(() => {
         verifyLeft();
     }, 500);
+    
 }
 
 printAliens();
-    setInterval(()=>{
+const mainGame = setInterval(()=>{
     main();
 },500)
+
+//Verif defaite
+
+function verifPlayerDefeat() {
+    const playerAlien = document.querySelectorAll('div.alien.tireur');
+    const alienVictoryLine = document.querySelectorAll("div[data-line='alienvictory'].alien")
+
+    if (playerAlien.length > 0 || alienVictoryLine.length > 0) {
+        //Defaite
+        clearInterval(mainGame)
+    }
+
+}
+

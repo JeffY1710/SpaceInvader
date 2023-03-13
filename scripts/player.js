@@ -54,14 +54,9 @@ const shootMoving = function () {
         }
 
     }, 100);
-
     shoot;
 }
-
-
-
 //Player deplacements
-
 const setPlayerShip = function (pos) {
     playerCase = gameCase[pos]
     playerCase.classList.add('tireur');

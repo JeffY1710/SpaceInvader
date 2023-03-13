@@ -26,6 +26,9 @@ function addBorder(){
             e.setAttribute('data','right');
             indexRight += 17;
         }
+        if ( i > 237 ) {
+            e.setAttribute('data-line','alienvictory')
+        }
         i++;
     });
 }
