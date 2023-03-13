@@ -1,18 +1,11 @@
 // 17 longueurs lignes
 // 15 hauteur colonnes
 
-const gameCase = document.querySelectorAll('#grille div')
+let gameCase = document.querySelectorAll('#grille div')
 
 let playerPos = 246
 let playerCase = gameCase[playerPos]
 playerCase.classList.add('tireur');
-
-let alien = gameCase[59]
-alien.classList.add('alien')
-let alien2 = gameCase[60]
-alien2.classList.add('alien')
-let alien3 = gameCase[58]
-alien3.classList.add('alien')
 
 const verifKill = () => {
     return (document.querySelector('#grille div.alien.laser'))
@@ -49,13 +42,15 @@ const shootMoving = function () {
         }
         if (verifKill()) {
             const caseKill = verifKill();
-            console.log('test');
+            console.log(caseKill);
             clearInterval(shoot)
             caseKill.classList.remove('alien', 'laser')
-            caseKill.classList.add('explosion');
-            setTimeout(() => {
+            /*caseKill.classList.add('explosion');*/
+            gameCase = document.querySelectorAll('#grille div');
+            caseKill.dataset.todelete = Array.prototype.indexOf.call(gameCase, caseKill)
+            /*setTimeout(() => {
                 caseKill.classList.remove('explosion')
-            }, 500);
+            }, 500);*/
         }
 
     }, 100);

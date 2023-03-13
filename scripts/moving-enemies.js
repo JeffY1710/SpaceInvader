@@ -1,6 +1,5 @@
-
 const allCases = document.querySelectorAll('#grille div');
-let aliens = [  0,1,2,3,4,5,6,7,8,9,10,11,
+let aliens = [0,1,2,3,4,5,6,7,8,9,10,11,
                 17,18,19,20,21,22,23,24,25,26,27,28,
                 34,35,36,37,38,39,40,41,42,43,44,45];
 let dataRight = document.querySelectorAll("div[data='right']");
@@ -50,7 +49,19 @@ function move(direction){
         });
 }
 
+function verifKilled() {
+    const casesToKill = document.querySelectorAll("div[data-todelete]");
+
+    casesToKill.forEach( (cases) => {
+        aliens = aliens.filter( id => id != cases.dataset.todelete)
+        cases.removeAttribute('data-todelete');
+        cases.classList.remove('alien', 'explosion', 'laser')
+        console.log(cases.dataset.todelete)
+    })
+}
+
 function main(){
+    verifKilled();
     deleteAliens();
     move(direction);
     printAliens();
@@ -65,4 +76,4 @@ function main(){
 printAliens();
     setInterval(()=>{
     main();
-},1000)
+},500)
