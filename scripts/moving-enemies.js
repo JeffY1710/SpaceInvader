@@ -6,6 +6,7 @@ let dataRight = document.querySelectorAll("div[data='right']");
 let dataLeft = document.querySelectorAll("div[data='left']");
 
 let direction = 1;
+const score = document.querySelector('#score')
 
 function printAliens(){
     aliens.forEach(e => {
@@ -56,7 +57,7 @@ function verifKilled() {
         aliens = aliens.filter( id => id != cases.dataset.todelete)
         cases.removeAttribute('data-todelete');
         cases.classList.remove('alien', 'explosion', 'laser')
-        console.log(cases.dataset.todelete)
+        score.innerHTML++;
     })
 }
 
