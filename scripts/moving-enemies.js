@@ -61,6 +61,7 @@ function verifKilled() {
 }
 
 function main(){
+    verifPlayerVictory();
     verifPlayerDefeat();
     verifKilled();
     deleteAliens();
@@ -90,6 +91,14 @@ function verifPlayerDefeat() {
         //Defaite
         clearInterval(mainGame)
     }
+}
 
+function verifPlayerVictory() {
+    const playerVictory = document.querySelectorAll('div.alien');
+    
+    if (!(playerVictory.length > 0)) {
+        console.log("Victoire")
+        clearInterval(mainGame)
+    }
 }
 
