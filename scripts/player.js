@@ -14,36 +14,36 @@ alien2.classList.add('alien')
 let alien3 = gameCase[58]
 alien3.classList.add('alien')
 
-const verifKill = () =>{
+const verifKill = () => {
     return (document.querySelector('#grille div.alien.laser'))
 }
 //Player shoot
 
-const setLaserCase= function (pos) {
+const setLaserCase = function (pos) {
 
     let laserCase = gameCase[pos];
-    const previousCase = gameCase[pos +17]
+    const previousCase = gameCase[pos + 17]
     if (previousCase || pos < 0) {
         previousCase.classList.remove('laser');
     }
     if (pos < 0) {
         previousCase.classList.remove('laser');
-    }else{
+    } else {
         laserCase.classList.add('laser');
     }
 
-    
+
     console.log(pos);
 }
 
-const shootMoving = function(){
-    let laserPosMoving = playerPos-17
+const shootMoving = function () {
+    let laserPosMoving = playerPos - 17
     setLaserCase(laserPosMoving)
 
     const shoot = setInterval(() => {
         if (laserPosMoving < 0) {
             clearInterval(shoot)
-        }else{
+        } else {
             laserPosMoving -= 17;
             setLaserCase(laserPosMoving)
         }
@@ -57,7 +57,7 @@ const shootMoving = function(){
                 caseKill.classList.remove('explosion')
             }, 500);
         }
-        
+
     }, 100);
 
     shoot;
@@ -82,14 +82,14 @@ setPlayerShip(246)
 // Player Controls
 
 window.addEventListener("keyup", (event) => {
-    
+    console.log(event);
     if (event.code == 'Space') {
         shootMoving();
 
     }
 
     if (event.code == 'ArrowRight') {
-        if (!(playerCase.getAttribute('data') =='right')) {
+        if (!(playerCase.getAttribute('data') == 'right')) {
             playerPos++;
             removePlayerShip();
             setPlayerShip(playerPos)
@@ -98,12 +98,27 @@ window.addEventListener("keyup", (event) => {
     }
 
     if (event.code == 'ArrowLeft') {
-        if (!(playerCase.getAttribute('data') =='left')) {
+        if (!(playerCase.getAttribute('data') == 'left')) {
             playerPos--;
             removePlayerShip();
             setPlayerShip(playerPos)
             console.log(playerPos);
         }
     }
+
+    if (event.code == 'ArrowUp' && (playerPos - 17 > 204)) {
+        playerPos -= 17;
+        removePlayerShip();
+        setPlayerShip(playerPos)
+
+    }
+
+
+    if (event.code == 'ArrowDown' && (playerPos + 17 < 254)) {
+        playerPos += 17;
+        removePlayerShip();
+        setPlayerShip(playerPos)
+    }
+    console.log(playerPos);
 })
 
