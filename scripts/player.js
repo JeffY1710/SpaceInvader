@@ -55,6 +55,7 @@ export class Player {
                 const caseKill = this.verifKill();
                 clearInterval(shoot)
                 caseKill.classList.remove('alien', 'laser')
+                caseKill.classList.add('explosion')
                 let gameCurrentGrid = this.grid;
                 caseKill.dataset.todelete = Array.prototype.indexOf.call(gameCurrentGrid, caseKill)
             }

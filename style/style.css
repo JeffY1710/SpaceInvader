@@ -33,7 +33,7 @@ h4{
 #grille div {
     width: 25px;
     height: 25px;
-    border: 2px solid gray;
+    border: 2px solid transparent;
 }
 .tireur {
     background: url(../assets/vaisseau.png);
@@ -42,7 +42,6 @@ h4{
     background-size: contain;
 }
 .explosion {
-    background: url(../assets/explosion.gif);
     transform: rotate(180deg);
     background-position: center;
     background-size: contain;
@@ -51,10 +50,12 @@ h4{
     background: url(../assets/ennemies.png);
     background-position: center;
     background-size: contain;
+    background-repeat: no-repeat;
 }
 .boom {
     background-color: red;
 }
 .laser {
-    background-color: orange;
+   background-repeat: no-repeat;
+   background-position: center;
 }

@@ -1,0 +1,105 @@
+body{
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #2C2C2C;
+}
+
+@keyframes explosionanim {
+    from {
+        background-image: url("../assets/animations/explosion/frame1.png");
+    }
+
+    20%{
+        background-image: url("../assets/animations/explosion/frame2.png");
+    }
+
+    40%{
+        background-image: url("../assets/animations/explosion/frame3.png");
+    }
+
+    60%{
+        background-image: url("../assets/animations/explosion/frame4.png");
+    }
+
+    to{
+        background-image: url("../assets/animations/explosion/frame5.png");
+    }
+}
+
+.explosion {
+    animation-name: explosionanim;
+    animation-duration: 500ms;
+    animation-iteration-count: infinite;
+}
+
+@keyframes enemiesanim {
+    from {
+        background-image: url("../assets/animations/enemies/frame_0000_frame1.png");
+    }
+
+    20%{
+        background-image: url("../assets/animations/enemies/frame_0001_frame2.png");
+    }
+
+    40%{
+        background-image: url("../assets/animations/enemies/frame_0002_frame3.png");
+    }
+
+    60%{
+        background-image: url("../assets/animations/enemies/frame_0003_frame4.png");
+    }
+
+    to{
+        background-image: url("../assets/animations/enemies/frame_0004_frame5.png");
+    }
+}
+
+@keyframes shootanim {
+    from {
+        background-image: url("../assets/animations/shoot/shoot_0000_frame1.png");
+    }
+
+    12% {
+        background-image: url("../assets/animations/shoot/shoot_0001_frame2.png");
+    }
+
+    24% {
+        background-image: url("../assets/animations/shoot/shoot_0002_frame3.png");
+    }
+
+    36% {
+        background-image: url("../assets/animations/shoot/shoot_0003_frame4.png");
+    }
+
+    48% {
+        background-image: url("../assets/animations/shoot/shoot_0004_frame5.png");
+    }
+
+    60%{
+        background-image: url("../assets/animations/shoot/shoot_0005_frame6.png");
+    }
+
+    72%{
+        background-image: url("../assets/animations/shoot/shoot_0006_frame7.png");
+    }
+    
+    to{
+        background-image: url("../assets/animations/shoot/shoot_0007_frame8.png") ;
+    }
+}
+
+.alien {
+    animation-name: enemiesanim;
+    animation-duration: 500ms;
+    animation-iteration-count: infinite;
+}
+
+.laser {
+    animation-name: shootanim;
+    animation-duration: 100ms;
+    animation-iteration-count: infinite;
+
+}
