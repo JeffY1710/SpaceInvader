@@ -5,6 +5,8 @@ import { generateGrid, addBorder } from "./generateGrid.js";
 //Create the Grid
 generateGrid();
 const cases = document.querySelectorAll('#grille div');
+
+var pop = document.querySelector('#pop-up');
 addBorder(cases);
 
 let aliens = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
@@ -12,35 +14,40 @@ let aliens = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
     34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45];
 
 const player = new Player(cases, 246);
-
-const enemies = new Enemies(cases,aliens)
+var restart = document.createElement("button");
+const enemies = new Enemies(cases, aliens)
 
 player.setPlayerShip();
 enemies.printAliens();
 
 const mainGame = setInterval(() => {
+    
+    var playerloose = document.querySelector('#grille div.tireur.alien')
+    var img = document.createElement('img');
+    var msg = document.createElement("p");
+    restart.setAttribute('id','restart');
+    console.log(restart);
 
     if (enemies.verifPlayerDefeat()) {
 
         clearInterval(mainGame);
-
-        var perdutest = document.querySelector('#pop-up');
-        var playerloose = document.querySelector('#grille div.tireur.alien')
-        var img = document.createElement('img');
-        var msg = document.createElement("p");
         if (playerloose) {
             img.src = "../assets/looser.gif";
-            perdutest.style.display = "block";
-            perdutest.appendChild(img);
-            perdutest.appendChild(msg);
-
+            msg.innerText = "GAME OVER";
+            restart.innerText = "RESTART"
+            pop.style.display = "block";
+            pop.appendChild(img);
+            pop.append(msg);
+            pop.append(restart)
 
         } else {
-            perdutest.style.display = "none";
+            pop.style.display = "none";
         }
     }
     if (enemies.verifPlayerVictory()) {
         clearInterval(mainGame);
+
+
         console.log('Victory');
     }
 
@@ -91,7 +98,13 @@ window.addEventListener("keyup", (event) => {
     }
 })
 
-verifloose();
+restart.addEventListener("click", function(){
+    pop.style.display= 'none';
+     
+    
+})
+
+ 
 
 
 
