@@ -1,5 +1,6 @@
-const gameGrid = document.querySelector('#grille');
+import { Player } from "./player.js";
 
+const gameGrid = document.querySelector('#grille');
 const generateGrid = function (){
     for (let index = 0; index < 255; index++) {
         
@@ -34,3 +35,46 @@ function addBorder(){
 }
 
 addBorder();
+
+const player = new Player(cases, 246);
+
+cases[15].classList.add("alien")
+
+player.setPlayerShip();
+
+window.addEventListener("keyup", (event) => {
+    if (event.code == 'Space') {
+        player.shootMoving();
+    }
+
+    if (event.code == 'ArrowRight') {
+        if (!(player.playerCase.getAttribute('data') == 'right')) {
+            player.playerPos++;
+            player.removePlayerShip();
+            player.setPlayerShip(player.playerPos)
+        }
+
+    }
+
+    if (event.code == 'ArrowLeft') {
+        if (!(player.playerCase.getAttribute('data') == 'left')) {
+            player.playerPos--;
+            player.removePlayerShip();
+            player.setPlayerShip(player.playerPos)
+        }
+    }
+
+    if (event.code == 'ArrowUp' && (player.playerPos - 17 > 204)) {
+        player.playerPos -= 17;
+        player.removePlayerShip();
+        player.setPlayerShip(player.playerPos)
+
+    }
+
+
+    if (event.code == 'ArrowDown' && (player.playerPos + 17 < 254)) {
+        player.playerPos += 17;
+        player.removePlayerShip();
+        player.setPlayerShip(player.playerPos)
+    }
+})
