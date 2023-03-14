@@ -56,6 +56,8 @@ export class Player {
                 clearInterval(shoot)
                 caseKill.classList.remove('alien', 'laser')
                 caseKill.classList.add('explosion')
+                let deathSound = new Audio("assets/sounds/pixel-death.mp3")
+                deathSound.play()
                 let gameCurrentGrid = this.grid;
                 caseKill.dataset.todelete = Array.prototype.indexOf.call(gameCurrentGrid, caseKill)
             }
