@@ -18,6 +18,15 @@ export class Enemies{
         });
     }
 
+    //Supprime toutes les divs de la grille
+
+    // clearGrid(){
+    //     const mainGrid = document.querySelector("#grille");
+    //     while (mainGrid.firstChild) {
+    //         mainGrid.removeChild(mainGrid.lastChild);
+    //     }
+    // }
+
     verifyRight(){
         let dataRight = document.querySelectorAll("div[data='right']");  
         dataRight.forEach(e => {
