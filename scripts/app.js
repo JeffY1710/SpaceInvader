@@ -1,4 +1,5 @@
 import { Player } from "./player.js";
+import { Enemies } from "./moving-enemies.js";
 
 const gameGrid = document.querySelector('#grille');
 const generateGrid = function (){
@@ -36,11 +37,39 @@ function addBorder(){
 
 addBorder();
 
+let aliens = [0,1,2,3,4,5,6,7,8,9,10,11,
+    17,18,19,20,21,22,23,24,25,26,27,28,
+    34,35,36,37,38,39,40,41,42,43,44,45];
+
 const player = new Player(cases, 246);
+
+const enemies = new Enemies(cases,aliens)
 
 cases[15].classList.add("alien")
 
 player.setPlayerShip();
+
+enemies.printAliens();
+
+const mainGame = setInterval(()=>{
+
+    if(enemies.verifPlayerDefeat()){
+        clearInterval(mainGame);
+    }
+    if(enemies.verifPlayerVictory()){
+        clearInterval(mainGame);
+        console.log('ddddddddddddddddddddd');
+    }
+
+    enemies.enemiesMain();
+    setTimeout(() => {
+        enemies.verifyRight();
+    }, 500);
+
+    setTimeout(() => {
+        enemies.verifyLeft();
+    }, 500);
+},500)
 
 window.addEventListener("keyup", (event) => {
     if (event.code == 'Space') {
