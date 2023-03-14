@@ -12,6 +12,12 @@
     align-items: center;
 }
 
+#pop-up{
+    display: none;
+    display: flex;
+    width: 40%;
+}
+
 @keyframes background-defile {
     from {
         background-position-y: 0px;
