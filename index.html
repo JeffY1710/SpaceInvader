@@ -8,6 +8,9 @@
   <link rel="stylesheet" href="style/grid.css">
 </head>
 <body>
+  <audio autoplay id="mainGameSound">
+    <source src="assets/sounds/gamesound.mp3" type="audio/mp3">
+  </audio>
 
   <h3>Score : <span id="score">0</span></h3>
   <div id="pop-up"></div>
@@ -16,7 +19,9 @@
 
   </div>
   
+  <button id="startGame">Player</button>
   <h4><img id = looser src="assets/looser.gif" alt=""></a></h4>
+  
   <script type="module" src="scripts/app.js"></script>
 </body>
 </html>

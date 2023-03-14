@@ -1,11 +1,15 @@
 import { Player } from "./player.js";
 import { Enemies } from "./enemies.js";
 import { generateGrid, addBorder } from "./generateGrid.js";
+import { gameSound } from "./soundeffect.js";
 
-//Create the Grid
+const startButton = document.querySelector('#startGame')
+
 generateGrid();
 const cases = document.querySelectorAll('#grille div');
 addBorder(cases);
+
+
 
 let aliens = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
     17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28,
@@ -17,6 +21,13 @@ const enemies = new Enemies(cases,aliens)
 
 player.setPlayerShip();
 enemies.printAliens();
+
+
+startButton.addEventListener('click', ()=>{
+    const mainGameAudioi = new Audio('/assets/sounds/gamesound.mp3')
+    mainGameAudioi.play();
+})
+
 
 const mainGame = setInterval(() => {
 
@@ -54,9 +65,14 @@ const mainGame = setInterval(() => {
     }, 500);
 }, 500)
 
+let canShoot = true;
 window.addEventListener("keyup", (event) => {
-    if (event.code == 'Space') {
+    if (event.code == 'Space' && canShoot) {
         player.shootMoving();
+        canShoot = !canShoot;
+        setTimeout(() => {
+            canShoot = !canShoot
+        }, 250);
     }
 
     if (event.code == 'ArrowRight') {
@@ -91,7 +107,7 @@ window.addEventListener("keyup", (event) => {
     }
 })
 
-verifloose();
+
 
 
 
