@@ -1,105 +1,87 @@
-const allCases = document.querySelectorAll('#grille div');
-let aliens = [0,1,2,3,4,5,6,7,8,9,10,11,
-                17,18,19,20,21,22,23,24,25,26,27,28,
-                34,35,36,37,38,39,40,41,42,43,44,45];
-let dataRight = document.querySelectorAll("div[data='right']");
-let dataLeft = document.querySelectorAll("div[data='left']");
+export class Enemies{
+    constructor(grid,aliens){
+        this.grid = grid;
+        this.aliens = aliens;
+        this.direction = 1;
+    }
 
-let direction = 1;
-const score = document.querySelector('#score')
-
-function printAliens(){
-    aliens.forEach(e => {
-        allCases[e].classList.add('alien');
-    });
-}
-
-function deleteAliens(){
-    aliens.forEach(e => {
-        allCases[e].classList.remove('alien');
-    });
-}
-
-function verifyRight(){  
-    dataRight.forEach(e => {
-        if(e.classList.contains('alien')){
-            deleteAliens();
-            move(17);
-            direction = -1;
-        }
-    });
-    printAliens();
-}
-
-function verifyLeft(){  
-    dataLeft.forEach(e => {
-        if(e.classList.contains('alien')){
-            deleteAliens();
-            move(17);
-            direction = 1;
-        }
-    });
-    printAliens();
-}
-
-function move(direction){
-    let index = 0;
-        aliens.forEach(e => {
-            aliens[index] += direction;
-            index++;
+    printAliens(){
+        this.aliens.forEach(e => {
+            this.grid[e].classList.add('alien');
         });
-}
-
-function verifKilled() {
-    const casesToKill = document.querySelectorAll("div[data-todelete]");
-
-    casesToKill.forEach( (cases) => {
-        aliens = aliens.filter( id => id != cases.dataset.todelete)
-        cases.removeAttribute('data-todelete');
-        cases.classList.remove('alien', 'explosion', 'laser')
-        score.innerHTML++;
-    })
-}
-
-function main(){
-    verifPlayerVictory();
-    verifPlayerDefeat();
-    verifKilled();
-    deleteAliens();
-    move(direction);
-    printAliens();
-    setTimeout(() => {
-        verifyRight();
-    }, 500);
-    setTimeout(() => {
-        verifyLeft();
-    }, 500);
+    }
     
-}
+     
+    deleteAliens(){
+        this.aliens.forEach(e => {
+            this.grid[e].classList.remove('alien');
+        });
+    }
 
-printAliens();
-const mainGame = setInterval(()=>{
-    main();
-},500)
+    verifyRight(){
+        let dataRight = document.querySelectorAll("div[data='right']");  
+        dataRight.forEach(e => {
+            if(e.classList.contains('alien')){
+                this.deleteAliens();
+                this.move(17);
+                this.direction = -1;
+            }
+        });
+        this.printAliens();
+    }
 
-//Verif defaite
+    verifyLeft(){  
+        let dataLeft = document.querySelectorAll("div[data='left']");
+        dataLeft.forEach(e => {
+            if(e.classList.contains('alien')){
+                this.deleteAliens();
+                this.move(17);
+                this.direction = 1;
+            }
+        });
+       this.printAliens();
+    }
 
-function verifPlayerDefeat() {
-    const playerAlien = document.querySelectorAll('div.alien.tireur');
-    const alienVictoryLine = document.querySelectorAll("div[data-line='alienvictory'].alien")
+    move(direction){
+        let index = 0;
+            this.aliens.forEach(e => {
+                this.aliens[index] += direction;
+                index++;
+            });
+    }
 
-    if (playerAlien.length > 0 || alienVictoryLine.length > 0) {
-        //Defaite
-        clearInterval(mainGame)
+    confirmKill() {
+        const casesToKill = document.querySelectorAll("div[data-todelete]");
+        const score = document.querySelector('#score');
+    
+        casesToKill.forEach( (cases) => {
+            this.aliens = this.aliens.filter( id => id != cases.dataset.todelete)
+            cases.removeAttribute('data-todelete');
+            cases.classList.remove('alien', 'explosion', 'laser')
+            score.innerHTML++;
+        })
+    }
+
+    verifPlayerDefeat() {
+        const playerAlien = document.querySelectorAll('div.alien.tireur');
+        const alienVictoryLine = document.querySelectorAll("div[data-line='alienvictory'].alien")
+        if(playerAlien.length > 0 || alienVictoryLine.length > 0){
+            return true;
+        };
+        console.log(alienVictoryLine);
+    }
+    
+    verifPlayerVictory() {
+        const playerVictory = document.querySelectorAll('div.alien');
+        if(!(playerVictory.length > 0)){
+            return true;
+        };
+    }
+
+    enemiesMain(){
+        this.confirmKill();
+        this.deleteAliens();
+        this.move(this.direction);
+        this.printAliens();
     }
 }
-
-function verifPlayerVictory() {
-    const playerVictory = document.querySelectorAll('div.alien');
-    
-    if (!(playerVictory.length > 0)) {
-        console.log("Victoire")
-        clearInterval(mainGame)
-    }
-}
-
