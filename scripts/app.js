@@ -1,42 +1,11 @@
 import { Player } from "./player.js";
-import { Enemies } from "./moving-enemies.js";
-import { verifloose } from "./looser.js";
+import { Enemies } from "./enemies.js";
+import { generateGrid, addBorder } from "./generateGrid.js";
 
-const gameGrid = document.querySelector('#grille');
-const generateGrid = function () {
-    for (let index = 0; index < 255; index++) {
-
-        const gameCase = document.createElement('div');
-        gameGrid.appendChild(gameCase);
-    }
-}
-
+//Create the Grid
 generateGrid();
-
 const cases = document.querySelectorAll('#grille div');
-
-function addBorder() {
-    let i = 0;
-    let indexLeft = 0;
-    let indexRight = 16;
-
-    cases.forEach(e => {
-        if (cases[i] == cases[indexLeft]) {
-            e.setAttribute('data', 'left');
-            indexLeft += 17;
-        }
-        if (cases[i] == cases[indexRight]) {
-            e.setAttribute('data', 'right');
-            indexRight += 17;
-        }
-        if (i > 237) {
-            e.setAttribute('data-line', 'alienvictory')
-        }
-        i++;
-    });
-}
-
-addBorder();
+addBorder(cases);
 
 let aliens = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
     17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28,
@@ -44,12 +13,9 @@ let aliens = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
 
 const player = new Player(cases, 246);
 
-const enemies = new Enemies(cases, aliens);
-
-cases[15].classList.add("alien");
+const enemies = new Enemies(cases,aliens)
 
 player.setPlayerShip();
-
 enemies.printAliens();
 
 const mainGame = setInterval(() => {
@@ -75,7 +41,7 @@ const mainGame = setInterval(() => {
     }
     if (enemies.verifPlayerVictory()) {
         clearInterval(mainGame);
-        console.log('ddddddddddddddddddddd');
+        console.log('Victory');
     }
 
     enemies.enemiesMain();
