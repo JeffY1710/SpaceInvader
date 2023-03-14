@@ -1,12 +1,13 @@
 import { Player } from "./player.js";
 import { Enemies } from "./moving-enemies.js";
+import { verifloose } from "./looser.js";
 
 const gameGrid = document.querySelector('#grille');
-const generateGrid = function (){
+const generateGrid = function () {
     for (let index = 0; index < 255; index++) {
-        
-       const gameCase = document.createElement('div');
-       gameGrid.appendChild(gameCase);
+
+        const gameCase = document.createElement('div');
+        gameGrid.appendChild(gameCase);
     }
 }
 
@@ -14,22 +15,22 @@ generateGrid();
 
 const cases = document.querySelectorAll('#grille div');
 
-function addBorder(){
+function addBorder() {
     let i = 0;
     let indexLeft = 0;
     let indexRight = 16;
 
     cases.forEach(e => {
-        if(cases[i] == cases[indexLeft]){
-            e.setAttribute('data','left');
+        if (cases[i] == cases[indexLeft]) {
+            e.setAttribute('data', 'left');
             indexLeft += 17;
         }
-        if(cases[i] == cases[indexRight]){
-            e.setAttribute('data','right');
+        if (cases[i] == cases[indexRight]) {
+            e.setAttribute('data', 'right');
             indexRight += 17;
         }
-        if ( i > 237 ) {
-            e.setAttribute('data-line','alienvictory')
+        if (i > 237) {
+            e.setAttribute('data-line', 'alienvictory')
         }
         i++;
     });
@@ -37,26 +38,42 @@ function addBorder(){
 
 addBorder();
 
-let aliens = [0,1,2,3,4,5,6,7,8,9,10,11,
-    17,18,19,20,21,22,23,24,25,26,27,28,
-    34,35,36,37,38,39,40,41,42,43,44,45];
+let aliens = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
+    17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28,
+    34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45];
 
 const player = new Player(cases, 246);
 
-const enemies = new Enemies(cases,aliens)
+const enemies = new Enemies(cases, aliens);
 
-cases[15].classList.add("alien")
+cases[15].classList.add("alien");
 
 player.setPlayerShip();
 
 enemies.printAliens();
 
-const mainGame = setInterval(()=>{
+const mainGame = setInterval(() => {
 
-    if(enemies.verifPlayerDefeat()){
+    if (enemies.verifPlayerDefeat()) {
+
         clearInterval(mainGame);
+
+        var perdutest = document.querySelector('#pop-up');
+        var playerloose = document.querySelector('#grille div.tireur.alien')
+        var img = document.createElement('img');
+        var msg = document.createElement("p");
+        if (playerloose) {
+            img.src = "../assets/looser.gif";
+            perdutest.style.display = "block";
+            perdutest.appendChild(img);
+            perdutest.appendChild(msg);
+
+
+        } else {
+            perdutest.style.display = "none";
+        }
     }
-    if(enemies.verifPlayerVictory()){
+    if (enemies.verifPlayerVictory()) {
         clearInterval(mainGame);
         console.log('ddddddddddddddddddddd');
     }
@@ -69,7 +86,7 @@ const mainGame = setInterval(()=>{
     setTimeout(() => {
         enemies.verifyLeft();
     }, 500);
-},500)
+}, 500)
 
 window.addEventListener("keyup", (event) => {
     if (event.code == 'Space') {
@@ -107,3 +124,8 @@ window.addEventListener("keyup", (event) => {
         player.setPlayerShip(player.playerPos)
     }
 })
+
+verifloose();
+
+
+

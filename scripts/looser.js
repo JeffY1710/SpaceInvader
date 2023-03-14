@@ -2,15 +2,17 @@
 
 const playerpos = document.querySelector('#grille div.tireur.alien');
 
+export const verifloose = function() {
+    var pop = document.querySelector('#pop-up');
+    var img = document.createElement('img');
+    if (playerpos) {
+        pop.appendChild(img);
+        pop.style.display = "block";
+        
 
-var perdutest = document.querySelector('h4');
-var img = document.createElement('img');
-if (playerpos){
-    perdutest.style.visibility="visible";
-    perdutest.appendChild(img);
-    
-    
-}else{
-    perdutest.style.visibility="hidden";
+
+    } else {
+        perdutest.style.display = "none";
+    }
+
 }
-
