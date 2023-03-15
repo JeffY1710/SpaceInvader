@@ -1,0 +1,154 @@
+#home{
+    font-family: 'Press Start 2P', cursive;
+    display: flex;
+    height: 100vh;
+    width: 80%;
+    align-items: center;
+    padding-top: 100px;
+    font-size: 18px;
+    color: white;
+    text-align: center;
+    flex-direction: column;
+    justify-content: start;
+}
+
+#game{
+    display: none;
+}
+
+.logo{
+    width: 400px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.logo__space{
+    position: relative;
+    width: 350px;
+    height: 70px;
+}
+
+.logo__space img{
+    position: absolute;
+    width: 100%;
+    left: 0;
+}
+
+.logo__invader{
+    margin-top: 20px;
+    position: relative;
+    width: 500px;
+    height: 100px;
+}
+
+.logo__invader img{
+    position: absolute;
+    width: 100%;
+    left: 0;
+}
+#menu {
+}
+#menu ul{
+    display: flex;
+    margin-top: 100px;
+    flex-direction: column;
+    row-gap: 50px;
+    font-size: 1em;
+    padding: 0;
+}
+#menu ul li{
+    display: block;
+    text-align: center;
+}
+.pixel-button{
+    font-family: 'Press Start 2P', cursive;
+    color: white;
+    outline: none;
+    border: none;
+    width: 200px;
+    padding: 1em;
+    box-shadow:   -3px 0 0 0 white,    
+                 3px 0 0 0 white,
+                 0 -3px 0 0 white,
+                 0 3px 0 0 white;
+    cursor: pointer;
+    background: none;
+}
+
+.pixel-button:hover{
+    
+    background-color: #efd639;
+    color: #1f122e;
+    box-shadow:   -4px 0 0 0 #efd639,    
+                 4px 0 0 0 #efd639,
+                 0 -4px 0 0 #efd639,
+                 0 4px 0 0 #efd639,
+
+                 0 4px 0 0 #efd639,
+                 0 4px 0 0 #efd639,
+                 10px 0 0 0 #9a5b1c,
+                 0px 10px 0 0 #9a5b1c,
+                 5px 10px 0 0 #9a5b1c;
+
+}
+
+.player-select{
+    margin-top: 150px;
+    row-gap: 50px;
+    visibility: collapse;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.player-select button{
+    background-color: #efd639;
+    color: #1f122e;
+    box-shadow:   -4px 0 0 0 #efd639,    
+                 4px 0 0 0 #efd639,
+                 0 -4px 0 0 #efd639,
+                 0 4px 0 0 #efd639,
+
+                 0 4px 0 0 #efd639,
+                 0 4px 0 0 #efd639,
+                 10px 0 0 0 #9a5b1c,
+                 0px 10px 0 0 #9a5b1c,
+                 5px 10px 0 0 #9a5b1c;
+    
+}
+
+input[name="playerName"]{
+    font-family: 'Press Start 2P', cursive;
+    border: none;
+    padding: 15px 15px;
+    font-size: 1.5em;
+    color: white;
+    background-color: transparent;
+    box-shadow:   -5px 0 0 0 #efd639,    
+                 5px 0 0 0 #efd639,
+                 0 -5px 0 0 #efd639,
+                 0 5px 0 0 #efd639;
+    
+    text-align: center;
+}
+
+input[name="playerName"]:focus{
+    border: none;
+    outline: none;
+    box-shadow: none;
+    box-shadow:   -4px 0 0 0 #efd639,    
+                 4px 0 0 0 #efd639,
+                 0 -4px 0 0 #efd639,
+                 0 4px 0 0 #efd639,
+
+                 0 4px 0 0 #efd639,
+                 0 4px 0 0 #efd639,
+                 8px 0 0 0 #9a5b1c,
+                 0px 5px 0 0 #9a5b1c,
+                 5px 8px 0 0 #9a5b1c;
+
+}
