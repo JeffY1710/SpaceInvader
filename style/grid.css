@@ -138,7 +138,7 @@ body{
 }
 .alien {
     animation-name: enemiesanim;
-    animation-duration: 500ms;
+    animation-duration: 550ms;
     animation-iteration-count: infinite;
 }
 
