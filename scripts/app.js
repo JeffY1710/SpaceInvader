@@ -15,6 +15,9 @@ addBorder(cases);
 let playerLose = null;
 const player = new Player(cases, 246);
 const restart = document.createElement("button");
+const soundgameover = document.createElement("audio");
+const soundgame = document.querySelector("#mainGameSound");
+const src = document.createElement("source")
 
 startButton.addEventListener('click', () => {
     const mainGameAudioi = new Audio('/assets/sounds/gamesound.mp3')
@@ -47,12 +50,23 @@ const coreGameFunction = function () {
             clearInterval(mainGame);
             if (playerLose) {
                 img.src = "../assets/looser.gif";
-                msg.innerText = "GAME OVER";
+                
+                src.src="../assets/sounds/game-over.mp3";
+                src.type= "audio/mp3";
+                soundgameover.append(src);
+                soundgameover.type= "audio/mp3";
+
+                msg.innerText = "GAME OVER \n YOUR SCORE : "+document.querySelector("#score").innerHTML;
                 restart.innerText = "RESTART"
                 pop.style.display = "block";
                 pop.appendChild(img);
                 pop.append(msg);
-                pop.append(restart)
+                pop.append(restart);
+                pop.append(soundgameover);
+                soundgame.pause();
+                soundgame.currentTime=0;
+                soundgameover.play();
+
 
             } else {
                 pop.style.display = "none";
