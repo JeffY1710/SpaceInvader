@@ -1,14 +1,19 @@
-.home{
+#home{
     font-family: 'Press Start 2P', cursive;
-    width: 80%;
-    height: 100vh;
     display: flex;
+    height: 100vh;
+    width: 80%;
     align-items: center;
     padding-top: 100px;
     font-size: 18px;
     color: white;
     text-align: center;
     flex-direction: column;
+    justify-content: start;
+}
+
+#game{
+    display: none;
 }
 
 .logo{
@@ -45,7 +50,9 @@
     width: 100%;
     left: 0;
 }
-.home ul{
+#menu {
+}
+#menu ul{
     display: flex;
     margin-top: 100px;
     flex-direction: column;
@@ -53,11 +60,15 @@
     font-size: 1em;
     padding: 0;
 }
-.home ul li{
+#menu ul li{
     display: block;
     text-align: center;
 }
 .pixel-button{
+    font-family: 'Press Start 2P', cursive;
+    color: white;
+    outline: none;
+    border: none;
     width: 200px;
     padding: 1em;
     box-shadow:   -3px 0 0 0 white,    
@@ -65,9 +76,11 @@
                  0 -3px 0 0 white,
                  0 3px 0 0 white;
     cursor: pointer;
+    background: none;
 }
 
 .pixel-button:hover{
+    
     background-color: #efd639;
     color: #1f122e;
     box-shadow:   -4px 0 0 0 #efd639,    
@@ -84,5 +97,58 @@
 }
 
 .player-select{
+    margin-top: 150px;
+    row-gap: 50px;
     visibility: collapse;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.player-select button{
+    background-color: #efd639;
+    color: #1f122e;
+    box-shadow:   -4px 0 0 0 #efd639,    
+                 4px 0 0 0 #efd639,
+                 0 -4px 0 0 #efd639,
+                 0 4px 0 0 #efd639,
+
+                 0 4px 0 0 #efd639,
+                 0 4px 0 0 #efd639,
+                 10px 0 0 0 #9a5b1c,
+                 0px 10px 0 0 #9a5b1c,
+                 5px 10px 0 0 #9a5b1c;
+    
+}
+
+input[name="playerName"]{
+    font-family: 'Press Start 2P', cursive;
+    border: none;
+    padding: 15px 15px;
+    font-size: 1.5em;
+    color: white;
+    background-color: transparent;
+    box-shadow:   -5px 0 0 0 #efd639,    
+                 5px 0 0 0 #efd639,
+                 0 -5px 0 0 #efd639,
+                 0 5px 0 0 #efd639;
+    
+    text-align: center;
+}
+
+input[name="playerName"]:focus{
+    border: none;
+    outline: none;
+    box-shadow: none;
+    box-shadow:   -4px 0 0 0 #efd639,    
+                 4px 0 0 0 #efd639,
+                 0 -4px 0 0 #efd639,
+                 0 4px 0 0 #efd639,
+
+                 0 4px 0 0 #efd639,
+                 0 4px 0 0 #efd639,
+                 8px 0 0 0 #9a5b1c,
+                 0px 5px 0 0 #9a5b1c,
+                 5px 8px 0 0 #9a5b1c;
+
 }

@@ -8,7 +8,6 @@ body{
 #grille {
     display: flex;
     flex-wrap: wrap;
-
     width: 500px;
     height: 500px;
     margin: 0 auto;
@@ -82,7 +81,7 @@ h4{
 #grille div {
     width: 25px;
     height: 25px;
-    border: 2px solid transparent;
+    border: 2px solid red;
 }
 .tireur {
     background: url(../assets/vaisseau.png);

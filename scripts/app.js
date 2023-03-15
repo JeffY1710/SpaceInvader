@@ -5,22 +5,14 @@ import { gameSound } from "./soundeffect.js";
 
 const startButton = document.querySelector('#startGame')
 const selectPlayerBtn = document.querySelector('#selectPlayer')
+const playerSelectSection = document.querySelector('#playerSelect')
+const homeSection = document.querySelector('#home')
+const menuSection = document.querySelector('#menu')
+const gameSection = document.querySelector('#game')
 
-generateGrid();
-let cases = document.querySelectorAll('#grille div');
 
 const pop = document.querySelector('#pop-up');
-addBorder(cases);
-
-
-let playerLose = null;
-const player = new Player(cases, 246);
 const restart = document.createElement("button");
-
-startButton.addEventListener('click', () => {
-    const mainGameAudioi = new Audio('/assets/sounds/gamesound.mp3')
-    mainGameAudioi.play();
-})
 
 const img = document.createElement('img');
 const msg = document.createElement("p");
@@ -28,7 +20,7 @@ const msg = document.createElement("p");
 let canShoot = null;
 
 const killAllAlien = function () {
-    document.querySelectorAll('#grille div.alien').forEach( cases => {
+    document.querySelectorAll('#grille div.alien').forEach(cases => {
         cases.classList.remove("alien")
     })
 }
@@ -80,54 +72,6 @@ const coreGameFunction = function () {
     }, 500);
 }
 
-coreGameFunction();
-
-
-window.addEventListener("keyup", (event) => {
-
-    if (!playerLose) {
-        if (event.code == 'Space' && canShoot) {
-            player.shootMoving();
-            canShoot = !canShoot;
-            setTimeout(() => {
-                canShoot = !canShoot
-            }, 250);
-        }
-    
-        if (event.code == 'ArrowRight') {
-            if (!(player.playerCase.getAttribute('data') == 'right')) {
-                player.playerPos++;
-                player.removePlayerShip();
-                player.setPlayerShip(player.playerPos)
-            }
-    
-        }
-    
-        if (event.code == 'ArrowLeft') {
-            if (!(player.playerCase.getAttribute('data') == 'left')) {
-                player.playerPos--;
-                player.removePlayerShip();
-                player.setPlayerShip(player.playerPos)
-            }
-        }
-    
-        if (event.code == 'ArrowUp' && (player.playerPos - 17 > 204)) {
-            player.playerPos -= 17;
-            player.removePlayerShip();
-            player.setPlayerShip(player.playerPos)
-    
-        }
-    
-    
-        if (event.code == 'ArrowDown' && (player.playerPos + 17 < 254)) {
-            player.playerPos += 17;
-            player.removePlayerShip();
-            player.setPlayerShip(player.playerPos)
-        }
-    }
-    
-})
-
 
 restart.addEventListener("click", function () {
     playerLose = null;
@@ -138,9 +82,69 @@ restart.addEventListener("click", function () {
     coreGameFunction();
 })
 
-selectPlayerBtn.addEventListener("click", ()=>{
-    
-} )
+selectPlayerBtn.addEventListener("click", () => {
+    playerSelectSection.style.visibility = 'visible'
+    menuSection.style.display = 'none'
+})
+
+
+
+generateGrid();
+let cases = document.querySelectorAll('#grille div');
+addBorder(cases);
+let playerLose = null;
+const player = new Player(cases, 246);
+
+startButton.addEventListener("click", () => {
+
+    homeSection.style.display = 'none'
+    gameSection.style.display = 'block';
+    coreGameFunction();
+
+    window.addEventListener("keyup", (event) => {
+        if (!playerLose) {
+            if (event.code == 'Space' && canShoot) {
+                player.shootMoving();
+                canShoot = !canShoot;
+                setTimeout(() => {
+                    canShoot = !canShoot
+                }, 250);
+            }
+
+            if (event.code == 'ArrowRight') {
+                if (!(player.playerCase.getAttribute('data') == 'right')) {
+                    player.playerPos++;
+                    player.removePlayerShip();
+                    player.setPlayerShip(player.playerPos)
+                }
+
+            }
+
+            if (event.code == 'ArrowLeft') {
+                if (!(player.playerCase.getAttribute('data') == 'left')) {
+                    player.playerPos--;
+                    player.removePlayerShip();
+                    player.setPlayerShip(player.playerPos)
+                }
+            }
+
+            if (event.code == 'ArrowUp' && (player.playerPos - 17 > 204)) {
+                player.playerPos -= 17;
+                player.removePlayerShip();
+                player.setPlayerShip(player.playerPos)
+
+            }
+
+
+            if (event.code == 'ArrowDown' && (player.playerPos + 17 < 254)) {
+                player.playerPos += 17;
+                player.removePlayerShip();
+                player.setPlayerShip(player.playerPos)
+            }
+        }
+
+    })
+})
 
 
 
