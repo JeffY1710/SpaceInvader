@@ -4,6 +4,7 @@ import { generateGrid, addBorder } from "./generateGrid.js";
 import { gameSound } from "./soundeffect.js";
 
 const startButton = document.querySelector('#startGame')
+const selectPlayerBtn = document.querySelector('#selectPlayer')
 
 generateGrid();
 let cases = document.querySelectorAll('#grille div');
@@ -24,13 +25,17 @@ startButton.addEventListener('click', () => {
 const img = document.createElement('img');
 const msg = document.createElement("p");
 
+let canShoot = null;
+
 const killAllAlien = function () {
     document.querySelectorAll('#grille div.alien').forEach( cases => {
         cases.classList.remove("alien")
     })
 }
 
+
 const coreGameFunction = function () {
+    canShoot = true;
     let aliens = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
         17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28,
         34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45];
@@ -78,8 +83,6 @@ const coreGameFunction = function () {
 coreGameFunction();
 
 
-
-let canShoot = true;
 window.addEventListener("keyup", (event) => {
 
     if (!playerLose) {
@@ -135,6 +138,9 @@ restart.addEventListener("click", function () {
     coreGameFunction();
 })
 
+selectPlayerBtn.addEventListener("click", ()=>{
+    
+} )
 
 
 

@@ -1,0 +1,88 @@
+.home{
+    font-family: 'Press Start 2P', cursive;
+    width: 80%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 100px;
+    font-size: 18px;
+    color: white;
+    text-align: center;
+    flex-direction: column;
+}
+
+.logo{
+    width: 400px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.logo__space{
+    position: relative;
+    width: 350px;
+    height: 70px;
+}
+
+.logo__space img{
+    position: absolute;
+    width: 100%;
+    left: 0;
+}
+
+.logo__invader{
+    margin-top: 20px;
+    position: relative;
+    width: 500px;
+    height: 100px;
+}
+
+.logo__invader img{
+    position: absolute;
+    width: 100%;
+    left: 0;
+}
+.home ul{
+    display: flex;
+    margin-top: 100px;
+    flex-direction: column;
+    row-gap: 50px;
+    font-size: 1em;
+    padding: 0;
+}
+.home ul li{
+    display: block;
+    text-align: center;
+}
+.pixel-button{
+    width: 200px;
+    padding: 1em;
+    box-shadow:   -3px 0 0 0 white,    
+                 3px 0 0 0 white,
+                 0 -3px 0 0 white,
+                 0 3px 0 0 white;
+    cursor: pointer;
+}
+
+.pixel-button:hover{
+    background-color: #efd639;
+    color: #1f122e;
+    box-shadow:   -4px 0 0 0 #efd639,    
+                 4px 0 0 0 #efd639,
+                 0 -4px 0 0 #efd639,
+                 0 4px 0 0 #efd639,
+
+                 0 4px 0 0 #efd639,
+                 0 4px 0 0 #efd639,
+                 10px 0 0 0 #9a5b1c,
+                 0px 10px 0 0 #9a5b1c,
+                 5px 10px 0 0 #9a5b1c;
+
+}
+
+.player-select{
+    visibility: collapse;
+}

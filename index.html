@@ -1,27 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="style/style.css">
   <link rel="stylesheet" href="style/grid.css">
+  <link rel="stylesheet" href="style/home.css">
 </head>
+
 <body>
   <audio autoplay id="mainGameSound">
     <source src="assets/sounds/gamesound.mp3" type="audio/mp3">
   </audio>
 
-  <h3>Score : <span id="score">0</span></h3>
-  <div id="pop-up"></div>
+  <section class="home">
+    <div class="logo">
+      <div class="logo__space">
+        <img src="assets/logo/space_front.png" alt="">
+        <img src="assets/logo/space_back.png" alt="">
+      </div>
 
-  <div id="grille">
+      <div class="logo__invader">
+        <img src="assets/logo/invader_front.png" alt="">
+        <img src="assets/logo/invader_back.png" alt="">
+      </div>
+    </div>
 
-  </div>
-  
-  <button id="startGame">Player</button>
-  <h4><img id = looser src="assets/looser.gif" alt=""></a></h4>
-  
+    <ul>
+      <li class="pixel-button" id="selectPlayer">JOUER</li>
+      <li class="pixel-button"> OPTIONS</li>
+      <li class="pixel-button">CREDITS</li>
+    </ul>
+  </section>
+
+  <section class="player-select" id="playerSelect">
+    <input type="text" name="playerName">
+  </section>
+
+  <section class="game" style="display: none;">
+    <h3>Score : <span id="score">0</span></h3>
+    <div id="pop-up"></div>
+    <div id="grille">
+    </div>
+    <h4><img id=looser src="assets/looser.gif" alt=""></a></h4>
+  </section>
   <script type="module" src="scripts/app.js"></script>
 </body>
+
 </html>
