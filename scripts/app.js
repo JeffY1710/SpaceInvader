@@ -33,6 +33,12 @@ const killAllAlien = function () {
     })
 }
 
+const killAllLaser = function (){
+    document.querySelectorAll('#grille div.laser').forEach(lasers =>{
+        lasers.classList.remove('laser')
+    })
+}
+
 const coreGameFunction = function () {
     let aliens = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
         17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28,
@@ -132,6 +138,7 @@ window.addEventListener("keyup", (event) => {
 
 function restartGame(){
     killAllAlien();
+    killAllLaser();
     player.removePlayerShip()
     player.setPlayerPos(246);
     coreGameFunction();
