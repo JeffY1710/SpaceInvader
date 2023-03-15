@@ -8,6 +8,9 @@ const startButton = document.querySelector('#startGame')
 generateGrid();
 let cases = document.querySelectorAll('#grille div');
 
+let wave = document.querySelector('#wave');
+let score = document.querySelector('#score');
+
 const pop = document.querySelector('#pop-up');
 addBorder(cases);
 
@@ -34,7 +37,6 @@ const coreGameFunction = function () {
     let aliens = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
         17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28,
         34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45];
-
     player.setPlayerShip(246);
     const enemies = new Enemies(cases, aliens)
     enemies.printAliens();
@@ -61,14 +63,24 @@ const coreGameFunction = function () {
         }
         if (enemies.verifPlayerVictory()) {
             clearInterval(mainGame);
-            console.log('Victory');
+            wave.innerText++;
+            restartGame();
         }
 
         enemies.enemiesMain();
+        if(enemies.canScore){
+            score.innerText++;
+        }
+        enemies.canScore = false;
     }, 550);
 }
 
 coreGameFunction();
+
+function resetAll(){
+    score.innerText = 0;
+    wave.innerText = 1;
+}
 
 
 
@@ -118,16 +130,20 @@ window.addEventListener("keyup", (event) => {
     
 })
 
-
-restart.addEventListener("click", function () {
-    playerLose = null;
-    pop.style.display = 'none';
+function restartGame(){
     killAllAlien();
     player.removePlayerShip()
     player.setPlayerPos(246);
     coreGameFunction();
-})
+}
 
+
+restart.addEventListener("click", function () {
+    playerLose = null;
+    pop.style.display = 'none';
+    restartGame();
+    resetAll();
+})
 
 
 

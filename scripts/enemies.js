@@ -3,6 +3,7 @@ export class Enemies{
         this.grid = grid;
         this.aliens = aliens;
         this.direction = 1;
+        this.canScore = false;
     }
 
     printAliens(){
@@ -50,15 +51,14 @@ export class Enemies{
             });
     }
 
+
     confirmKill() {
         const casesToKill = document.querySelectorAll("div[data-todelete]");
-        const score = document.querySelector('#score');
-    
         casesToKill.forEach( (cases) => {
             this.aliens = this.aliens.filter( id => id != cases.dataset.todelete)
             cases.removeAttribute('data-todelete');
             cases.classList.remove('alien', 'explosion', 'laser')
-            score.innerHTML++;
+            this.canScore = true;
         })
     }
 
@@ -72,7 +72,6 @@ export class Enemies{
     
     verifPlayerVictory() {
         const playerVictory = document.querySelectorAll('div.alien');
-        console.log(playerVictory);
         if(!(playerVictory.length > 0)){
             return true;
         };
