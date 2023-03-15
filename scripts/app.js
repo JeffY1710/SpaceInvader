@@ -4,37 +4,33 @@ import { generateGrid, addBorder } from "./generateGrid.js";
 import { gameSound } from "./soundeffect.js";
 
 const startButton = document.querySelector('#startGame')
+const selectPlayerBtn = document.querySelector('#selectPlayer')
+const playerSelectSection = document.querySelector('#playerSelect')
+const homeSection = document.querySelector('#home')
+const menuSection = document.querySelector('#menu')
+const gameSection = document.querySelector('#game')
 
-generateGrid();
-let cases = document.querySelectorAll('#grille div');
 
 let wave = document.querySelector('#wave');
 let score = document.querySelector('#score');
 
 const pop = document.querySelector('#pop-up');
-addBorder(cases);
-
-
-let playerLose = null;
-const player = new Player(cases, 246);
 const restart = document.createElement("button");
 const soundgameover = document.createElement("audio");
 const soundgame = document.querySelector("#mainGameSound");
 const src = document.createElement("source")
 
-startButton.addEventListener('click', () => {
-    const mainGameAudioi = new Audio('/assets/sounds/gamesound.mp3')
-    mainGameAudioi.play();
-})
-
 const img = document.createElement('img');
 const msg = document.createElement("p");
+
+let canShoot = true;
 
 const killAllAlien = function () {
     document.querySelectorAll('#grille div.alien').forEach(cases => {
         cases.classList.remove("alien")
     })
 }
+
 
 const coreGameFunction = function () {
 
@@ -49,8 +45,6 @@ const coreGameFunction = function () {
     const mainGame = setInterval(() => {
         restart.setAttribute('id', 'restart');
         
-
-
         if (enemies.verifPlayerDefeat()) {
             playerLose = true
             clearInterval(mainGame);
@@ -108,7 +102,20 @@ const coreGameFunction = function () {
     }, 550);
 }
 
-coreGameFunction();
+
+restart.addEventListener("click", function () {
+    playerLose = null;
+    pop.style.display = 'none';
+    killAllAlien();
+    player.removePlayerShip()
+    player.setPlayerPos(246);
+    coreGameFunction();
+})
+
+selectPlayerBtn.addEventListener("click", () => {
+    playerSelectSection.style.visibility = 'visible'
+    menuSection.style.display = 'none'
+})
 
 function resetAll() {
     score.innerText = 0;
@@ -117,51 +124,64 @@ function resetAll() {
 
 
 
-let canShoot = true;
-window.addEventListener("keyup", (event) => {
+generateGrid();
+let cases = document.querySelectorAll('#grille div');
+addBorder(cases);
+let playerLose = null;
+const player = new Player(cases, 246);
 
-    if (!playerLose) {
-        if (event.code == 'Space' && canShoot) {
-            player.shootMoving();
-            canShoot = !canShoot;
-            setTimeout(() => {
-                canShoot = !canShoot
-            }, 250);
-        }
+startButton.addEventListener("click", () => {
 
-        if (event.code == 'ArrowRight') {
-            if (!(player.playerCase.getAttribute('data') == 'right')) {
-                player.playerPos++;
+    homeSection.style.display = 'none'
+    gameSection.style.display = 'block';
+    coreGameFunction();
+
+    window.addEventListener("keyup", (event) => {
+        if (!playerLose) {
+            if (event.code == 'Space' && canShoot) {
+                player.shootMoving();
+                canShoot = !canShoot;
+                setTimeout(() => {
+                    canShoot = !canShoot
+                }, 250);
+            }
+
+            if (event.code == 'ArrowRight') {
+                if (!(player.playerCase.getAttribute('data') == 'right')) {
+                    player.playerPos++;
+                    player.removePlayerShip();
+                    player.setPlayerShip(player.playerPos)
+                }
+
+            }
+
+            if (event.code == 'ArrowLeft') {
+                if (!(player.playerCase.getAttribute('data') == 'left')) {
+                    player.playerPos--;
+                    player.removePlayerShip();
+                    player.setPlayerShip(player.playerPos)
+                }
+            }
+
+            if (event.code == 'ArrowUp' && (player.playerPos - 17 > 204)) {
+                player.playerPos -= 17;
+                player.removePlayerShip();
+                player.setPlayerShip(player.playerPos)
+
+            }
+
+
+            if (event.code == 'ArrowDown' && (player.playerPos + 17 < 254)) {
+                player.playerPos += 17;
+
                 player.removePlayerShip();
                 player.setPlayerShip(player.playerPos)
             }
-
         }
 
-        if (event.code == 'ArrowLeft') {
-            if (!(player.playerCase.getAttribute('data') == 'left')) {
-                player.playerPos--;
-                player.removePlayerShip();
-                player.setPlayerShip(player.playerPos)
-            }
-        }
-
-        if (event.code == 'ArrowUp' && (player.playerPos - 17 > 204)) {
-            player.playerPos -= 17;
-            player.removePlayerShip();
-            player.setPlayerShip(player.playerPos)
-
-        }
-
-
-        if (event.code == 'ArrowDown' && (player.playerPos + 17 < 254)) {
-            player.playerPos += 17;
-            player.removePlayerShip();
-            player.setPlayerShip(player.playerPos)
-        }
-    }
-
+    })
 })
+
 
 function restartGame() {
     killAllAlien();
@@ -178,6 +198,5 @@ restart.addEventListener("click", function () {
     resetAll();
     soundgame.play();
 })
-
 
 
