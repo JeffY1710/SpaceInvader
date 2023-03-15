@@ -10,6 +10,8 @@ const homeSection = document.querySelector('#home')
 const menuSection = document.querySelector('#menu')
 const gameSection = document.querySelector('#game')
 
+const backMenu = document.querySelector('#backMenu');
+const directRestart = document.querySelector('#directRestart');
 
 let wave = document.querySelector('#wave');
 let score = document.querySelector('#score');
@@ -103,6 +105,7 @@ const coreGameFunction = function () {
         if (enemies.verifPlayerVictory()) {
             clearInterval(mainGame);
             wave.innerText++;
+            player.shootingSpeed+=50;
             restartGame();
         }
 
@@ -112,6 +115,22 @@ const coreGameFunction = function () {
         }
         enemies.canScore = false;
     }, 500);
+    
+    directRestart.addEventListener('click',()=>{
+        // playerLose = null;
+        // clearInterval(mainGame);
+        // restartGame();
+        // resetAll();
+        // soundgame.play();
+    })
+    
+    backMenu.addEventListener('click',()=>{
+        // clearInterval(mainGame);
+        // playerSelectSection.style.visibility = 'collapse'
+        // menuSection.style.display = 'flex'
+        // homeSection.style.display = 'block'
+        // gameSection.style.display = 'none';
+    })
 }
 
 
@@ -138,17 +157,17 @@ function restartGame() {
 restart.addEventListener("click", function () {
     playerLose = null;
     pop.style.display = 'none';
-    killAllAlien();
     restartGame();
     resetAll();
     soundgame.play();
 })
 
-
 startButton.addEventListener("click", () => {
 
     homeSection.style.display = 'none'
-    gameSection.style.display = 'block';
+    gameSection.style.display = 'flex';
+    gameSection.style.gap = '50px';
+    
 
     coreGameFunction();
 
