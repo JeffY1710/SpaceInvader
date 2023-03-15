@@ -64,7 +64,7 @@ export class Player {
                 caseKill.dataset.todelete = Array.prototype.indexOf.call(gameCurrentGrid, caseKill)
             }
 
-        }, 50);
+        }, 100);
         shoot;
     }
 
