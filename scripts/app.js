@@ -6,119 +6,133 @@ import { gameSound } from "./soundeffect.js";
 const startButton = document.querySelector('#startGame')
 
 generateGrid();
-const cases = document.querySelectorAll('#grille div');
+let cases = document.querySelectorAll('#grille div');
 
-var pop = document.querySelector('#pop-up');
+const pop = document.querySelector('#pop-up');
 addBorder(cases);
 
 
-
-let aliens = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
-    17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28,
-    34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45];
-
+let playerLose = null;
 const player = new Player(cases, 246);
-var restart = document.createElement("button");
-const enemies = new Enemies(cases, aliens)
+const restart = document.createElement("button");
 
-player.setPlayerShip();
-enemies.printAliens();
-
-
-startButton.addEventListener('click', ()=>{
+startButton.addEventListener('click', () => {
     const mainGameAudioi = new Audio('/assets/sounds/gamesound.mp3')
     mainGameAudioi.play();
 })
 
+const img = document.createElement('img');
+const msg = document.createElement("p");
 
-const mainGame = setInterval(() => {
-    
-    var playerloose = document.querySelector('#grille div.tireur.alien')
-    var img = document.createElement('img');
-    var msg = document.createElement("p");
-    restart.setAttribute('id','restart');
-    console.log(restart);
+const killAllAlien = function () {
+    document.querySelectorAll('#grille div.alien').forEach( cases => {
+        cases.classList.remove("alien")
+    })
+}
 
-    if (enemies.verifPlayerDefeat()) {
+const coreGameFunction = function () {
+    let aliens = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
+        17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28,
+        34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45];
 
-        clearInterval(mainGame);
-        if (playerloose) {
-            img.src = "../assets/looser.gif";
-            msg.innerText = "GAME OVER";
-            restart.innerText = "RESTART"
-            pop.style.display = "block";
-            pop.appendChild(img);
-            pop.append(msg);
-            pop.append(restart)
+    player.setPlayerShip(246);
+    const enemies = new Enemies(cases, aliens)
+    enemies.printAliens();
 
-        } else {
-            pop.style.display = "none";
+    const mainGame = setInterval(() => {
+        restart.setAttribute('id', 'restart');
+
+        if (enemies.verifPlayerDefeat()) {
+            playerLose = true
+            clearInterval(mainGame);
+            if (playerLose) {
+                img.src = "../assets/looser.gif";
+                msg.innerText = "GAME OVER";
+                restart.innerText = "RESTART"
+                pop.style.display = "block";
+                pop.appendChild(img);
+                pop.append(msg);
+                pop.append(restart)
+
+            } else {
+                pop.style.display = "none";
+
+            }
         }
-    }
-    if (enemies.verifPlayerVictory()) {
-        clearInterval(mainGame);
+        if (enemies.verifPlayerVictory()) {
+            clearInterval(mainGame);
+            console.log('Victory');
+        }
 
+        enemies.enemiesMain();
+        setTimeout(() => {
+            enemies.verifyRight();
+        }, 500);
 
-        console.log('Victory');
-    }
-
-    enemies.enemiesMain();
-    setTimeout(() => {
-        enemies.verifyRight();
+        setTimeout(() => {
+            enemies.verifyLeft();
+        }, 500);
     }, 500);
+}
 
-    setTimeout(() => {
-        enemies.verifyLeft();
-    }, 500);
-}, 500)
+coreGameFunction();
+
+
 
 let canShoot = true;
 window.addEventListener("keyup", (event) => {
-    if (event.code == 'Space' && canShoot) {
-        player.shootMoving();
-        canShoot = !canShoot;
-        setTimeout(() => {
-            canShoot = !canShoot
-        }, 250);
-    }
 
-    if (event.code == 'ArrowRight') {
-        if (!(player.playerCase.getAttribute('data') == 'right')) {
-            player.playerPos++;
+    if (!playerLose) {
+        if (event.code == 'Space' && canShoot) {
+            player.shootMoving();
+            canShoot = !canShoot;
+            setTimeout(() => {
+                canShoot = !canShoot
+            }, 250);
+        }
+    
+        if (event.code == 'ArrowRight') {
+            if (!(player.playerCase.getAttribute('data') == 'right')) {
+                player.playerPos++;
+                player.removePlayerShip();
+                player.setPlayerShip(player.playerPos)
+            }
+    
+        }
+    
+        if (event.code == 'ArrowLeft') {
+            if (!(player.playerCase.getAttribute('data') == 'left')) {
+                player.playerPos--;
+                player.removePlayerShip();
+                player.setPlayerShip(player.playerPos)
+            }
+        }
+    
+        if (event.code == 'ArrowUp' && (player.playerPos - 17 > 204)) {
+            player.playerPos -= 17;
+            player.removePlayerShip();
+            player.setPlayerShip(player.playerPos)
+    
+        }
+    
+    
+        if (event.code == 'ArrowDown' && (player.playerPos + 17 < 254)) {
+            player.playerPos += 17;
             player.removePlayerShip();
             player.setPlayerShip(player.playerPos)
         }
-
     }
-
-    if (event.code == 'ArrowLeft') {
-        if (!(player.playerCase.getAttribute('data') == 'left')) {
-            player.playerPos--;
-            player.removePlayerShip();
-            player.setPlayerShip(player.playerPos)
-        }
-    }
-
-    if (event.code == 'ArrowUp' && (player.playerPos - 17 > 204)) {
-        player.playerPos -= 17;
-        player.removePlayerShip();
-        player.setPlayerShip(player.playerPos)
-
-    }
-
-
-    if (event.code == 'ArrowDown' && (player.playerPos + 17 < 254)) {
-        player.playerPos += 17;
-        player.removePlayerShip();
-        player.setPlayerShip(player.playerPos)
-    }
+    
 })
 
 
-restart.addEventListener("click", function(){
-    pop.style.display= 'none';
-     
-    
+restart.addEventListener("click", function () {
+    playerLose = null;
+    pop.style.display = 'none';
+    killAllAlien();
+    player.removePlayerShip()
+    player.setPlayerPos(246);
+    coreGameFunction();
 })
 
 

@@ -68,11 +68,11 @@ export class Enemies{
         if(playerAlien.length > 0 || alienVictoryLine.length > 0){
             return true;
         };
-        console.log(alienVictoryLine);
     }
     
     verifPlayerVictory() {
         const playerVictory = document.querySelectorAll('div.alien');
+        console.log(playerVictory);
         if(!(playerVictory.length > 0)){
             return true;
         };
