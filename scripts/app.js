@@ -65,14 +65,7 @@ const coreGameFunction = function () {
         }
 
         enemies.enemiesMain();
-        setTimeout(() => {
-            enemies.verifyRight();
-        }, 500);
-
-        setTimeout(() => {
-            enemies.verifyLeft();
-        }, 500);
-    }, 500);
+    }, 550);
 }
 
 coreGameFunction();

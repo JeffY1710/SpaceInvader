@@ -83,5 +83,9 @@ export class Enemies{
         this.deleteAliens();
         this.move(this.direction);
         this.printAliens();
+        setTimeout(() => {
+            this.verifyRight();
+            this.verifyLeft();
+        }, 500);
     }
 }
