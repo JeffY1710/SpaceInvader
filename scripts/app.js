@@ -23,6 +23,13 @@ const src = document.createElement("source")
 const img = document.createElement('img');
 const msg = document.createElement("p");
 
+generateGrid();
+let cases = document.querySelectorAll('#grille div');
+addBorder(cases);
+let playerLose = null;
+const player = new Player(cases, 246);
+
+
 let canShoot = true;
 
 const killAllAlien = function () {
@@ -44,19 +51,18 @@ const coreGameFunction = function () {
     
     const mainGame = setInterval(() => {
         restart.setAttribute('id', 'restart');
-        
         if (enemies.verifPlayerDefeat()) {
             playerLose = true
             clearInterval(mainGame);
             if (playerLose) {
-                const deathplayer=document.querySelector('#grille div.alien.tireur')
+                let deathplayer=document.querySelector('#grille div.alien.tireur')
                 if(deathplayer){
                     deathplayer.classList.remove('alien');
                     deathplayer.classList.remove('tireur');
                     deathplayer.classList.add('explosion');
                 }
                 else{
-                    deathplayer =  deathplayer=document.querySelector('#grille div.tireur')
+                    deathplayer =  document.querySelector('#grille div.tireur')
                     deathplayer.classList.remove('tireur');
                     deathplayer.classList.add('explosion');
                 }
@@ -80,7 +86,7 @@ const coreGameFunction = function () {
                     soundgame.currentTime = 0;
                     soundgameover.play();
 
-                },1000)
+                },500)
 
 
             } else {
@@ -99,18 +105,10 @@ const coreGameFunction = function () {
             score.innerText++;
         }
         enemies.canScore = false;
-    }, 550);
+    }, 500);
 }
 
 
-restart.addEventListener("click", function () {
-    playerLose = null;
-    pop.style.display = 'none';
-    killAllAlien();
-    player.removePlayerShip()
-    player.setPlayerPos(246);
-    coreGameFunction();
-})
 
 selectPlayerBtn.addEventListener("click", () => {
     playerSelectSection.style.visibility = 'visible'
@@ -122,18 +120,29 @@ function resetAll() {
     wave.innerText = 1;
 }
 
+function restartGame() {
+    killAllAlien();
+    player.removePlayerShip()
+    player.setPlayerPos(246);
+    coreGameFunction();
+}
 
 
-generateGrid();
-let cases = document.querySelectorAll('#grille div');
-addBorder(cases);
-let playerLose = null;
-const player = new Player(cases, 246);
+restart.addEventListener("click", function () {
+    playerLose = null;
+    pop.style.display = 'none';
+    killAllAlien();
+    restartGame();
+    resetAll();
+    soundgame.play();
+})
+
 
 startButton.addEventListener("click", () => {
 
     homeSection.style.display = 'none'
     gameSection.style.display = 'block';
+
     coreGameFunction();
 
     window.addEventListener("keyup", (event) => {
@@ -182,21 +191,5 @@ startButton.addEventListener("click", () => {
     })
 })
 
-
-function restartGame() {
-    killAllAlien();
-    player.removePlayerShip()
-    player.setPlayerPos(246);
-    coreGameFunction();
-}
-
-
-restart.addEventListener("click", function () {
-    playerLose = null;
-    pop.style.display = 'none';
-    restartGame();
-    resetAll();
-    soundgame.play();
-})
 
 

@@ -83,7 +83,7 @@ h4{
 #grille div {
     width: 25px;
     height: 25px;
-    border: 2px solid red;
+    border: 2px solid transparent;
 }
 .tireur {
     background: url(../assets/vaisseau.png);

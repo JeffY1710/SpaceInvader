@@ -7,6 +7,7 @@ export class Enemies{
     }
 
     printAliens(){
+        console.log(this.aliens);
         this.aliens.forEach(e => {
             this.grid[e].classList.add('alien');
         });
