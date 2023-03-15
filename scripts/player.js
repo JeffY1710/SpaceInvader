@@ -11,8 +11,11 @@ export class Player {
         this.playerCase = null;
     }
 
-    setPlayerShip() {
-        this.playerCase = this.grid[this.playerPos]
+    setPlayerPos(newPos){
+        this.playerPos = newPos
+    }
+    setPlayerShip(pos = this.playerPos) {
+        this.playerCase = this.grid[pos]
         this.playerCase.classList.add('tireur');
     }
 
@@ -48,11 +51,10 @@ export class Player {
             } else {
                 laserPosMoving -= 17;
                 this.setLaserCase(laserPosMoving)
-                console.log(laserPosMoving);
             }
 
             if (this.verifKill()) {
-                const caseKill = this.verifKill();
+                let caseKill = this.verifKill();
                 clearInterval(shoot)
                 caseKill.classList.remove('alien', 'laser')
                 caseKill.classList.add('explosion')
@@ -62,7 +64,7 @@ export class Player {
                 caseKill.dataset.todelete = Array.prototype.indexOf.call(gameCurrentGrid, caseKill)
             }
 
-        }, 100);
+        }, 50);
         shoot;
     }
 
