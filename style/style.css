@@ -32,6 +32,7 @@ body{
     
     border-radius: 10px;
     background-color: rgba(78, 78, 78, 0.555);
+    z-index: 10;
         
 }
 
@@ -92,6 +93,14 @@ h4{
     transform: rotate(180deg);
     background-position: center;
     background-size: contain;
+   
+}
+.tireur {
+    background: url(../assets/vaisseau.png);
+    transform: rotate(180deg);
+    background-position: center;
+    background-size: contain;
+   
 }
 .explosion {
     transform: rotate(180deg);

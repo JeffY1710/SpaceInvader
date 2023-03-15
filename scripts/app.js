@@ -31,12 +31,13 @@ const img = document.createElement('img');
 const msg = document.createElement("p");
 
 const killAllAlien = function () {
-    document.querySelectorAll('#grille div.alien').forEach( cases => {
+    document.querySelectorAll('#grille div.alien').forEach(cases => {
         cases.classList.remove("alien")
     })
 }
 
 const coreGameFunction = function () {
+
     let aliens = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
         17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28,
         34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45];
@@ -44,30 +45,48 @@ const coreGameFunction = function () {
     const enemies = new Enemies(cases, aliens)
     enemies.printAliens();
 
+    
     const mainGame = setInterval(() => {
         restart.setAttribute('id', 'restart');
+        
+
 
         if (enemies.verifPlayerDefeat()) {
             playerLose = true
             clearInterval(mainGame);
             if (playerLose) {
-                img.src = "../assets/looser.gif";
+                const deathplayer=document.querySelector('#grille div.alien.tireur')
+                if(deathplayer){
+                    deathplayer.classList.remove('alien');
+                    deathplayer.classList.remove('tireur');
+                    deathplayer.classList.add('explosion');
+                }
+                else{
+                    deathplayer =  deathplayer=document.querySelector('#grille div.tireur')
+                    deathplayer.classList.remove('tireur');
+                    deathplayer.classList.add('explosion');
+                }
+                let deathplayerSound = new Audio("assets/sounds/exploalien.wav");
+                deathplayerSound.play();
                 
-                src.src="../assets/sounds/game-over.mp3";
-                src.type= "audio/mp3";
-                soundgameover.append(src);
-                soundgameover.type= "audio/mp3";
+                setTimeout ( () => {
+                    img.src = "../assets/looser.gif";
+                    src.src = "../assets/sounds/game-over.mp3";
+                    src.type = "audio/mp3";
+                    soundgameover.append(src);
+                    soundgameover.type = "audio/mp3";
+                    msg.innerText = "GAME OVER \n YOUR SCORE : " + document.querySelector("#score").innerHTML;
+                    restart.innerText = "RESTART"
+                    pop.style.display = "block";
+                    pop.appendChild(img);
+                    pop.append(msg); 
+                    pop.append(restart);
+                    pop.append(soundgameover);
+                    soundgame.pause();
+                    soundgame.currentTime = 0;
+                    soundgameover.play();
 
-                msg.innerText = "GAME OVER \n YOUR SCORE : "+document.querySelector("#score").innerHTML;
-                restart.innerText = "RESTART"
-                pop.style.display = "block";
-                pop.appendChild(img);
-                pop.append(msg);
-                pop.append(restart);
-                pop.append(soundgameover);
-                soundgame.pause();
-                soundgame.currentTime=0;
-                soundgameover.play();
+                },1000)
 
 
             } else {
@@ -82,7 +101,7 @@ const coreGameFunction = function () {
         }
 
         enemies.enemiesMain();
-        if(enemies.canScore){
+        if (enemies.canScore) {
             score.innerText++;
         }
         enemies.canScore = false;
@@ -91,7 +110,7 @@ const coreGameFunction = function () {
 
 coreGameFunction();
 
-function resetAll(){
+function resetAll() {
     score.innerText = 0;
     wave.innerText = 1;
 }
@@ -109,16 +128,16 @@ window.addEventListener("keyup", (event) => {
                 canShoot = !canShoot
             }, 250);
         }
-    
+
         if (event.code == 'ArrowRight') {
             if (!(player.playerCase.getAttribute('data') == 'right')) {
                 player.playerPos++;
                 player.removePlayerShip();
                 player.setPlayerShip(player.playerPos)
             }
-    
+
         }
-    
+
         if (event.code == 'ArrowLeft') {
             if (!(player.playerCase.getAttribute('data') == 'left')) {
                 player.playerPos--;
@@ -126,25 +145,25 @@ window.addEventListener("keyup", (event) => {
                 player.setPlayerShip(player.playerPos)
             }
         }
-    
+
         if (event.code == 'ArrowUp' && (player.playerPos - 17 > 204)) {
             player.playerPos -= 17;
             player.removePlayerShip();
             player.setPlayerShip(player.playerPos)
-    
+
         }
-    
-    
+
+
         if (event.code == 'ArrowDown' && (player.playerPos + 17 < 254)) {
             player.playerPos += 17;
             player.removePlayerShip();
             player.setPlayerShip(player.playerPos)
         }
     }
-    
+
 })
 
-function restartGame(){
+function restartGame() {
     killAllAlien();
     player.removePlayerShip()
     player.setPlayerPos(246);
@@ -157,6 +176,7 @@ restart.addEventListener("click", function () {
     pop.style.display = 'none';
     restartGame();
     resetAll();
+    soundgame.play();
 })
 
 
