@@ -163,6 +163,8 @@ selectOptionBtn.addEventListener("click", () =>{
 selectScoreBtn.addEventListener("click", ()=>{
     scoreboardSection.style.display ='flex'
     menuSection.style.display = 'none'
+})
+
 function deleteTogglebg(){
     const btns = document.querySelectorAll('#difficulty li')
     console.log(btns);
