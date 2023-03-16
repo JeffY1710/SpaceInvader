@@ -87,6 +87,12 @@ const coreGameFunction = function () {
     player.setPlayerShip(246);
     const enemies = new Enemies(cases, aliens)
     enemies.printAliens();
+
+    if(localStorage.getItem('difficulty') == 'medium'){
+        enemies.speed = 500;
+    } else if(localStorage.getItem('difficulty') == 'hard'){
+        enemies.speed = 250;
+    }
         
     
     const mainGame = setInterval(() => {
@@ -131,7 +137,7 @@ const coreGameFunction = function () {
             score.innerText++;
         }
         enemies.canScore = false;
-    }, 500);
+    }, enemies.speed);
     
     directRestart.addEventListener('click',()=>{
         document.querySelector('.tireur').classList.add('alien');

@@ -4,6 +4,7 @@ export class Enemies{
         this.aliens = aliens;
         this.direction = 1;
         this.canScore = false;
+        this.speed = 1000;
     }
 
     printAliens(){
@@ -86,6 +87,6 @@ export class Enemies{
         setTimeout(() => {
             this.verifyRight();
             this.verifyLeft();
-        }, 500);
+        }, this.speed);
     }
 }
