@@ -27,22 +27,30 @@ body{
 
 #pop-up{
     display: none;
-    display: flex;
     flex-wrap: wrap;
     position: absolute;
     
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 450px;
+    width: 40%;
     
-    border-radius: 10px;
-    background-color: rgba(78, 78, 78, 0.555);
+    background-color: rgba(17, 0, 56, 0.555);
+    box-shadow:   -4px 0 0 0 #efd639,    
+                 4px 0 0 0 #efd639,
+                 0 -4px 0 0 #efd639,
+                 0 4px 0 0 #efd639,
+                 
+                 0 4px 0 0 #efd639,
+                 0 4px 0 0 #efd639,
+                 10px 0 0 0 #9a5b1c,
+                 0px 10px 0 0 #9a5b1c,
+                 5px 10px 0 0 #9a5b1c;
     z-index: 10;
         
 }
 
-#pop-up p{
+#finalscore{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -52,7 +60,7 @@ body{
     color: aliceblue;
     font-size: 200%;
 }
-#pop-up img{
+#pop-up #imgfinal{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -60,16 +68,18 @@ body{
     border-radius: 10px;
     opacity: 75%;
 }
-#pop-up button{
-    width: 30%;
-    border-radius: 10px;
-    font-size: 200%;
-    top: 50%;
-    left: 50%;
-    transform: translate(115%, -40%);
+#restart{
+    display: block;
+    margin: 5% auto;
+    font-size: 2.5em;
+    padding: 10px;
     font-family: 'VT323', monospace;
     cursor: pointer;
+
+
 }
+
+
 
 @keyframes background-defile {
     from {
