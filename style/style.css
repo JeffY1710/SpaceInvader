@@ -4,7 +4,6 @@
 body{
     font-family: 'VT323', monospace;
     position: relative;
-    overflow-y: hidden;
 }
 
 #grille {
