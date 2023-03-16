@@ -2,8 +2,16 @@ import { Player } from "./player.js";
 import { Enemies } from "./enemies.js";
 import { generateGrid, addBorder } from "./generateGrid.js";
 import { gameSound } from "./soundeffect.js";
-
+import { setCurrentPseudo, setLocalStorageScore } from "./storagescript.js";
 import { generalSoundVolume, gameMusicVolume, generalEffectVolume } from "./settings.js";
+
+if (localStorage.getItem('score') === null) {
+    localStorage.setItem('score', "[]")
+}
+
+if (localStorage.getItem('pseudo') === null) {
+    localStorage.setItem('pseudo', "")
+}
 
 const startButton = document.querySelector('#startGame')
 const selectPlayerBtn = document.querySelector('#selectPlayer')
@@ -80,6 +88,7 @@ const coreGameFunction = function () {
                     msg.innerText = "GAME OVER \n YOUR SCORE : " + document.querySelector("#score").innerText+"\n WAVE : "+ document.querySelector('#wave').innerText;
                     restart.innerText = "RESTART"
                     pop.style.display = "block";
+                    setLocalStorageScore(score.innerText)
                     pop.appendChild(img);
                     pop.append(msg); 
                     pop.append(restart);
@@ -174,6 +183,7 @@ startButton.addEventListener("click", () => {
     gameSection.style.display = 'flex';
     gameSection.style.gap = '50px';
     
+    setCurrentPseudo(document.querySelector("input[name='playerName']").value)
 
     coreGameFunction();
 
