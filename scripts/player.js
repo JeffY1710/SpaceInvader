@@ -39,6 +39,10 @@ export class Player {
         } else {
             laserCase.classList.add('laser');
         }
+        setTimeout(() => {
+            laserCase.classList.remove('laser');
+            console.log('clear');
+        }, 1000);
     }
 
     shootMoving() {
