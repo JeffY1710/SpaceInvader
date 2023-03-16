@@ -130,7 +130,7 @@ const coreGameFunction = function () {
     })
     
     backMenu.addEventListener('click',()=>{
-        window.location.href = '/';
+        window.location.reload();
     })
 }
 
