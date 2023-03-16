@@ -155,6 +155,12 @@ selectPlayerBtn.addEventListener("click", () => {
     menuSection.style.display = 'none'
 })
 
+next.disabled = true;
+
+document.querySelector("input[name='playerName']").addEventListener('input', (e)=>{
+    next.disabled = e.target.value.length < 1
+})
+
 next.addEventListener('click',()=>{
     playerSelectSection.style.display = "none";
     difficulty.style.display = "block"
