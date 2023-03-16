@@ -43,13 +43,27 @@
 
  
   <section id="game">
-    <h3>Score : <span id="score">0</span></h3>
-    <h3>Wave : <span id="wave">1</span></h3>
-    <div id="pop-up"></div>
-    <div id="grille">
+
+    <div class="info-game">
+      <h3>Score : <span id="score">0</span></h3>
+      <h3>Wave :  <span id="wave">1</span></h3>
     </div>
-    <h4><img id=looser src="assets/looser.gif" alt=""></a></h4>
+
+    <div class="main-game">
+      <div id="pop-up"></div>
+      <div id="grille">
+      </div>
+      <h4><img id=looser src="assets/looser.gif" alt=""></a></h4>
+    </div>
+
+    <div class="game-buttons">
+      <ul>
+        <li class="pixel-button" id="backMenu">Back to Menu</li>
+        <li class="pixel-button" id="directRestart">Abandonner</li>
+      </ul>
+    </div>
   </section>
+
   <script type="module" src="scripts/app.js"></script>
 </body>
 

@@ -10,6 +10,8 @@ const homeSection = document.querySelector('#home')
 const menuSection = document.querySelector('#menu')
 const gameSection = document.querySelector('#game')
 
+const backMenu = document.querySelector('#backMenu');
+const directRestart = document.querySelector('#directRestart');
 
 let wave = document.querySelector('#wave');
 let score = document.querySelector('#score');
@@ -35,6 +37,12 @@ let canShoot = true;
 const killAllAlien = function () {
     document.querySelectorAll('#grille div.alien').forEach(cases => {
         cases.classList.remove("alien")
+    })
+}
+
+const killAllLaser = function (){
+    document.querySelectorAll('#grille div.laser').forEach(lasers =>{
+        lasers.classList.remove('laser')
     })
 }
 
@@ -97,6 +105,7 @@ const coreGameFunction = function () {
         if (enemies.verifPlayerVictory()) {
             clearInterval(mainGame);
             wave.innerText++;
+            player.shootingSpeed+=50;
             restartGame();
         }
 
@@ -106,6 +115,14 @@ const coreGameFunction = function () {
         }
         enemies.canScore = false;
     }, 500);
+    
+    directRestart.addEventListener('click',()=>{
+        document.querySelector('.tireur').classList.add('alien');
+    })
+    
+    backMenu.addEventListener('click',()=>{
+        window.location.href = '/';
+    })
 }
 
 
@@ -122,6 +139,7 @@ function resetAll() {
 
 function restartGame() {
     killAllAlien();
+    killAllLaser();
     player.removePlayerShip()
     player.setPlayerPos(246);
     coreGameFunction();
@@ -131,17 +149,17 @@ function restartGame() {
 restart.addEventListener("click", function () {
     playerLose = null;
     pop.style.display = 'none';
-    killAllAlien();
     restartGame();
     resetAll();
     soundgame.play();
 })
 
-
 startButton.addEventListener("click", () => {
 
     homeSection.style.display = 'none'
-    gameSection.style.display = 'block';
+    gameSection.style.display = 'flex';
+    gameSection.style.gap = '50px';
+    
 
     coreGameFunction();
 
