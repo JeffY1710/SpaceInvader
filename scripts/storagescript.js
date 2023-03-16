@@ -16,7 +16,7 @@ export function setLocalStorageScore(userScore) {
     const convertedCurrentScores = JSON.parse(currentScores)
     let score = {
         pseudo: getCurrentPseudo(),
-        score: userScore
+        score: userScore,
     }
     convertedCurrentScores.push(score);
     localStorage.setItem('score', JSON.stringify(convertedCurrentScores));

@@ -22,6 +22,9 @@ const difficulty = document.querySelector('#difficulty')
 const selectOptionBtn = document.querySelector('#selectOption')
 const optionSelectSection = document.querySelector('#options')
 
+const selectScoreBtn = document.querySelector('#selectScore')
+const scoreboardSection = document.querySelector('#scoreboard')
+
 const homeSection = document.querySelector('#home')
 const menuSection = document.querySelector('#menu')
 const gameSection = document.querySelector('#game')
@@ -146,6 +149,11 @@ selectOptionBtn.addEventListener("click", () =>{
     menuSection.style.display = 'none'
 })
 
+selectScoreBtn.addEventListener("click", ()=>{
+    scoreboardSection.style.display ='flex'
+    menuSection.style.display = 'none'
+})
+
 function resetAll() {
     score.innerText = 0;
     wave.innerText = 1;
@@ -176,6 +184,7 @@ backButton.forEach( (button) => {
         menuSection.style.display = 'none'
         playerSelectSection.style.display = 'none'
         optionSelectSection.style.display = 'none'
+        scoreboardSection.style.display ='none'
         menuSection.style.display = 'flex'
         })
 })
