@@ -29,6 +29,10 @@ const optionSelectSection = document.querySelector('#options')
 const selectScoreBtn = document.querySelector('#selectScore')
 const scoreboardSection = document.querySelector('#scoreboard')
 
+const selectCreditsBtn = document.querySelector('#selectCredits')
+const creditsselect = document.querySelector('#credits')
+const selectlogo = document.querySelector('.logo')
+
 const homeSection = document.querySelector('#home')
 const menuSection = document.querySelector('#menu')
 const gameSection = document.querySelector('#game')
@@ -175,6 +179,16 @@ selectOptionBtn.addEventListener("click", () =>{
 selectScoreBtn.addEventListener("click", ()=>{
     scoreboardSection.style.display ='flex'
     menuSection.style.display = 'none'
+})
+
+selectCreditsBtn.addEventListener("click", ()=>{
+    creditsselect.style.display ='block'
+    menuSection.style.display = 'none'
+    selectlogo.style.display= 'none'
+    setTimeout(()=>{
+        window.location.reload();
+    },30000)
+    
 })
 
 function deleteTogglebg(){
