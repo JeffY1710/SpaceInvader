@@ -15,7 +15,14 @@ body{
     animation: background-defile 5s linear infinite;
     justify-content: center;
     align-items: center;
-    border: 1px solid grey;
+    border: 1px solid #efd639;
+    box-shadow:   -4px 0 0 0 #efd639,    
+                 4px 0 0 0 #efd639,
+                 0 -4px 0 0 #efd639,
+                 0 4px 0 0 #efd639,
+
+                 0 4px 0 0 #efd639,
+                 0 4px 0 0 #efd639
 }
 
 #pop-up{
