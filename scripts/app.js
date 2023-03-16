@@ -39,7 +39,8 @@ addBorder(cases);
 let playerLose = null;
 const player = new Player(cases, 246);
 
-
+gameSoundeffect.play();
+gameSoundeffect.loop= true;
 let canShoot = true;
 
 const killAllAlien = function () {
@@ -56,7 +57,7 @@ const killAllLaser = function (){
 
 
 const coreGameFunction = function () {
-    // gameSoundeffect.play();    
+      
     let aliens = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
         17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28,
         34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45];
@@ -66,7 +67,7 @@ const coreGameFunction = function () {
         
     
     const mainGame = setInterval(() => {
-        gameSoundeffect.play();
+        
         restart.setAttribute('id', 'restart');
         if (enemies.verifPlayerDefeat()) {
             playerLose = true
@@ -145,6 +146,9 @@ function restartGame() {
 
 
 restart.addEventListener("click", function () {
+    gameSoundeffect.pause();
+    gameSoundeffect.currentTime=0;
+    gameSoundeffect.play();
     playerLose = null;
     pop.style.display = 'none';
     restartGame();
@@ -163,7 +167,9 @@ backButton.forEach( (button) => {
 
 startButton.addEventListener("click", () => {
 
-    
+    gameSoundeffect.pause();
+    gameSoundeffect.currentTime=0;
+    gameSoundeffect.play();
     homeSection.style.display = 'none'
     gameSection.style.display = 'flex';
     gameSection.style.gap = '50px';
