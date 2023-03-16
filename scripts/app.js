@@ -117,19 +117,11 @@ const coreGameFunction = function () {
     }, 500);
     
     directRestart.addEventListener('click',()=>{
-        // playerLose = null;
-        // clearInterval(mainGame);
-        // restartGame();
-        // resetAll();
-        // soundgame.play();
+        document.querySelector('.tireur').classList.add('alien');
     })
     
     backMenu.addEventListener('click',()=>{
-        // clearInterval(mainGame);
-        // playerSelectSection.style.visibility = 'collapse'
-        // menuSection.style.display = 'flex'
-        // homeSection.style.display = 'block'
-        // gameSection.style.display = 'none';
+        window.location.href = '/';
     })
 }
 
