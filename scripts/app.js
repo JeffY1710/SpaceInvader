@@ -3,15 +3,23 @@ import { Enemies } from "./enemies.js";
 import { generateGrid, addBorder } from "./generateGrid.js";
 import { gameSound } from "./soundeffect.js";
 
+import { generalSoundVolume, gameMusicVolume, generalEffectVolume } from "./settings.js";
+
 const startButton = document.querySelector('#startGame')
 const selectPlayerBtn = document.querySelector('#selectPlayer')
 const playerSelectSection = document.querySelector('#playerSelect')
+
+const selectOptionBtn = document.querySelector('#selectOption')
+const optionSelectSection = document.querySelector('#options')
+
 const homeSection = document.querySelector('#home')
 const menuSection = document.querySelector('#menu')
 const gameSection = document.querySelector('#game')
 
+const backButton = document.querySelectorAll('.back')
 const backMenu = document.querySelector('#backMenu');
 const directRestart = document.querySelector('#directRestart');
+
 
 let wave = document.querySelector('#wave');
 let score = document.querySelector('#score');
@@ -19,7 +27,7 @@ let score = document.querySelector('#score');
 const pop = document.querySelector('#pop-up');
 const restart = document.createElement("button");
 const soundgameover = document.createElement("audio");
-const soundgame = document.querySelector("#mainGameSound");
+export const soundgame = document.querySelector("#mainGameSound");
 const src = document.createElement("source")
 
 const img = document.createElement('img');
@@ -75,6 +83,7 @@ const coreGameFunction = function () {
                     deathplayer.classList.add('explosion');
                 }
                 let deathplayerSound = new Audio("assets/sounds/exploalien.wav");
+                deathplayerSound.volume = generalEffectVolume;
                 deathplayerSound.play();
                 
                 setTimeout ( () => {
@@ -128,7 +137,12 @@ const coreGameFunction = function () {
 
 
 selectPlayerBtn.addEventListener("click", () => {
-    playerSelectSection.style.visibility = 'visible'
+    playerSelectSection.style.display = 'flex'
+    menuSection.style.display = 'none'
+})
+
+selectOptionBtn.addEventListener("click", () =>{
+    optionSelectSection.style.display ='flex'
     menuSection.style.display = 'none'
 })
 
@@ -152,6 +166,16 @@ restart.addEventListener("click", function () {
     restartGame();
     resetAll();
     soundgame.play();
+})
+
+backButton.forEach( (button) => {
+    console.log("Hi");
+    button.addEventListener("click", () => {
+        menuSection.style.display = 'none'
+        playerSelectSection.style.display = 'none'
+        optionSelectSection.style.display = 'none'
+        menuSection.style.display = 'flex'
+        })
 })
 
 startButton.addEventListener("click", () => {

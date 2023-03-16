@@ -39,6 +39,22 @@
     left: 0;
 }
 
+.logo__space img:nth-child(1){
+    z-index: 5;
+}
+.logo__invader img:nth-child(1){
+    z-index: 5;
+}
+
+.logo__space img:nth-child(1)::before{
+    position: absolute;
+    content: "c";
+    display: block;
+    width: 50px;
+    height: 50px;
+    background-image: url('../assets/logo/light_waves.png');
+}
+
 .logo__invader{
     margin-top: 20px;
     position: relative;
@@ -99,8 +115,7 @@
 .player-select{
     margin-top: 150px;
     row-gap: 50px;
-    visibility: collapse;
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
 }
