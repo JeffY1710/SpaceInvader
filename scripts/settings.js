@@ -5,6 +5,7 @@ const gameMusic = document.querySelector('#game-music-sound')
 const generalEffect = document.querySelector('#general-effect-sound')
 
 const testEffectBtn = document.querySelector('#effects')
+const testMusicBtn = document.querySelector('#musique')
 
 
 export let generalSoundVolume = generalSound.value /10
@@ -43,4 +44,12 @@ generalEffect.addEventListener("input", ()=>{
 
 testEffectBtn.addEventListener("click", ()=>{
     defeatSound.play()
+})
+
+testMusicBtn.addEventListener("click", ()=>{
+    gameSoundeffect.play()
+    setTimeout(() => {
+        gameSoundeffect.pause();
+        gameSoundeffect.currentTime = 0;
+    }, 3000);
 })

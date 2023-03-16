@@ -33,38 +33,47 @@
     </section>
 
     <section class="player-select" id="playerSelect">
-      <input type="text" name="playerName" placeholder="PSEUDO" >
-      <button class="pixel-button" id="startGame" >START</button>
+      <input type="text" name="playerName" placeholder="PSEUDO">
+      <button class="pixel-button" id="startGame">START</button>
       <button class="pixel-button back">RETOUR</button>
     </section>
 
     <section id="options">
       <div class="options__items">
         SON GENERAL
-        <input type="range" min="0" max="10" id="general-game-sound" value="2">
+        <div>
+          <input type="range" min="0" max="10" id="general-game-sound" value="2">
+        </div>
+        
       </div>
       <div class="options__items">
         SON MUSIQUE
-        <input type="range" min="0" max="10" id="game-music-sound" value="2">
+        <div>
+          <input type="range" min="0" max="10" id="game-music-sound" value="2">
+        </div>
       </div>
+      <button id="musique" class="pixel-button">TEST</button>
       <div class="options__items">
-        SON EFFETS 
-        <input type="range" min="0" max="10" id="general-effect-sound" value="2">
-        <button id="effects">Play</button>
+        SON EFFETS
+        <div>
+          <input type="range" min="0" max="10" id="general-effect-sound" value="2">
+          
+        </div>
       </div>
+      <button id="effects" class="pixel-button">TEST</button>
 
       <button class="pixel-button back">RETOUR</button>
-      
+
     </section>
 
   </section>
 
- 
+
   <section id="game">
 
     <div class="info-game">
       <h3>Score : <span id="score">0</span></h3>
-      <h3>Wave :  <span id="wave">1</span></h3>
+      <h3>Wave : <span id="wave">1</span></h3>
     </div>
 
     <div class="main-game">
