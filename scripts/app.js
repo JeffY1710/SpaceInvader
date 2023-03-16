@@ -28,10 +28,6 @@ export let explotireur = new Audio("assets/sounds/explotireur.wav");
 export let shootsound = new Audio("assets/sounds/laser.wav");
 export let gameSoundeffect = new Audio("assets/sounds/gamesound.mp3");
 
-gameSoundeffect.play();
-defeatSound.load()
-defeatSound.play()
-
 const pop = document.querySelector('#pop-up');
 const restart = document.createElement("button");
 const img = document.createElement('img');
