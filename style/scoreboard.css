@@ -1,0 +1,32 @@
+#scoreboard{
+    display: none;
+    flex-direction: column;
+    align-items: center;
+}
+
+#scoreboard button{
+    box-shadow:   -4px 0 0 0 #efd639,    
+                 4px 0 0 0 #efd639,
+                 0 -4px 0 0 #efd639,
+                 0 4px 0 0 #efd639,
+                 
+                 0 4px 0 0 #efd639,
+                 0 4px 0 0 #efd639,
+                 10px 0 0 0 #9a5b1c,
+                 0px 10px 0 0 #9a5b1c,
+                 5px 10px 0 0 #9a5b1c;
+                 background-color: #efd639;
+}
+
+.score__table{
+    width: 500px;
+    height: 500px;
+
+    box-shadow:   -4px 0 0 0 #efd639,    
+                 4px 0 0 0 #efd639,
+                 0 -4px 0 0 #efd639,
+                 0 4px 0 0 #efd639,
+
+                 0 4px 0 0 #efd639,
+                 0 4px 0 0 #efd639
+}
