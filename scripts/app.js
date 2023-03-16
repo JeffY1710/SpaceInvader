@@ -76,10 +76,6 @@ const coreGameFunction = function () {
                
                 setTimeout ( () => {
                     img.src = "../assets/looser.gif";
-                    src.src = "../assets/sounds/game-over.mp3";
-                    src.type = "audio/mp3";
-                    soundgameover.append(src);
-                    soundgameover.type = "audio/mp3";
                     msg.innerText = "GAME OVER \n YOUR SCORE : " + document.querySelector("#score").innerText+"\n WAVE : "+ document.querySelector('#wave').innerText;
                     restart.innerText = "RESTART"
                     pop.style.display = "block";
