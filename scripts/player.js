@@ -9,6 +9,7 @@ export class Player {
         this.grid = grid;
         this.playerPos = playerPos
         this.playerCase = null;
+        this.shootingSpeed = 100;
     }
 
     setPlayerPos(newPos){
@@ -64,7 +65,7 @@ export class Player {
                 caseKill.dataset.todelete = Array.prototype.indexOf.call(gameCurrentGrid, caseKill)
             }
 
-        }, 100);
+        }, this.shootingSpeed);
         shoot;
     }
 

@@ -1,8 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url(options.css);
 body{
     font-family: 'VT323', monospace;
     position: relative;
+    overflow-y: hidden;
 }
 
 #grille {
@@ -14,6 +16,7 @@ body{
     animation: background-defile 5s linear infinite;
     justify-content: center;
     align-items: center;
+    border: 1px solid grey;
 }
 
 #pop-up{
@@ -24,7 +27,7 @@ body{
     
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -70%);
+    transform: translate(-50%, -50%);
     width: 450px;
     
     border-radius: 10px;
@@ -117,5 +120,62 @@ h4{
 .laser {
    background-repeat: no-repeat;
    background-position: center;
+}
+
+.game-buttons ul{
+    display: flex;
+    flex-direction: column;
+    row-gap: 50px;
+    font-size: 1em;
+    padding: 0;
+}
+.game-buttons ul li{
+    display: block;
+    text-align: center;
+}
+
+.game-buttons{
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#backMenu,#directRestart{
+    background-color: #efd639;
+    color: #1f122e;
+    box-shadow:   -4px 0 0 0 #efd639,    
+                 4px 0 0 0 #efd639,
+                 0 -4px 0 0 #efd639,
+                 0 4px 0 0 #efd639,
+
+                 0 4px 0 0 #efd639,
+                 0 4px 0 0 #efd639,
+                 10px 0 0 0 #9a5b1c,
+                 0px 10px 0 0 #9a5b1c,
+                 5px 10px 0 0 #9a5b1c;
+}
+
+.info-game{
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.info-game h3{
+    font-family: 'Press Start 2P', cursive;
+    color: white;
+    outline: none;
+    border: none;
+    width: 200px;
+    padding: 1em;
+    box-shadow:   -3px 0 0 0 white,    
+                 3px 0 0 0 white,
+                 0 -3px 0 0 white,
+                 0 3px 0 0 white;
+    background: none;
 }
 
