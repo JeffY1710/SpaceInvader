@@ -14,6 +14,7 @@
 
 #game{
     display: none;
+    height: 500px;
 }
 
 .logo{
@@ -66,8 +67,7 @@
     width: 100%;
     left: 0;
 }
-#menu {
-}
+
 #menu ul{
     display: flex;
     margin-top: 100px;
