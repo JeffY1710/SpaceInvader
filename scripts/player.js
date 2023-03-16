@@ -9,7 +9,12 @@ export class Player {
         this.grid = grid;
         this.playerPos = playerPos
         this.playerCase = null;
-        this.shootingSpeed = 100;
+        this.shootingSpeed = 100
+        this.volume = 1;
+    }
+
+    setVolume(vol){
+        this.volume = vol;
     }
 
     setPlayerPos(newPos){
@@ -41,7 +46,6 @@ export class Player {
         }
         setTimeout(() => {
             laserCase.classList.remove('laser');
-            console.log('clear');
         }, 1000);
     }
 
@@ -64,6 +68,7 @@ export class Player {
                 caseKill.classList.remove('alien', 'laser')
                 caseKill.classList.add('explosion')
                 let deathSound = new Audio("assets/sounds/exploalien.wav")
+                deathSound.volume = this.volume
                 deathSound.play()
                 let gameCurrentGrid = this.grid;
                 caseKill.dataset.todelete = Array.prototype.indexOf.call(gameCurrentGrid, caseKill)

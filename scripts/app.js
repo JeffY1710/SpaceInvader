@@ -1,7 +1,6 @@
 import { Player } from "./player.js";
 import { Enemies } from "./enemies.js";
 import { generateGrid, addBorder } from "./generateGrid.js";
-import { gameSound } from "./soundeffect.js";
 import { setCurrentDifficulty, setCurrentPseudo, setLocalStorageScore } from "./storagescript.js";
 import { generalSoundVolume, gameMusicVolume, generalEffectVolume } from "./settings.js";
 
@@ -89,6 +88,7 @@ const coreGameFunction = function () {
         17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28,
         34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45];
     player.setPlayerShip(246);
+    player.setVolume(shootsound.volume)
     const enemies = new Enemies(cases, aliens)
     enemies.printAliens();
 
@@ -194,7 +194,6 @@ selectCreditsBtn.addEventListener("click", ()=>{
 
 function deleteTogglebg(){
     const btns = document.querySelectorAll('#difficulty li')
-    console.log(btns);
     btns.forEach(e => {
         e.classList.remove('togglebg')
     });
@@ -243,7 +242,6 @@ restart.addEventListener("click", function () {
 })
 
 backButton.forEach( (button) => {
-    console.log("Hi");
     button.addEventListener("click", () => {
         menuSection.style.display = 'none'
         playerSelectSection.style.display = 'none'
