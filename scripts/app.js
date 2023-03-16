@@ -16,6 +16,8 @@ if (localStorage.getItem('pseudo') === null) {
 const startButton = document.querySelector('#startGame')
 const selectPlayerBtn = document.querySelector('#selectPlayer')
 const playerSelectSection = document.querySelector('#playerSelect')
+const next = document.querySelector('#next');
+const difficulty = document.querySelector('#difficulty')
 
 const selectOptionBtn = document.querySelector('#selectOption')
 const optionSelectSection = document.querySelector('#options')
@@ -133,6 +135,11 @@ const coreGameFunction = function () {
 selectPlayerBtn.addEventListener("click", () => {
     playerSelectSection.style.display = 'flex'
     menuSection.style.display = 'none'
+})
+
+next.addEventListener('click',()=>{
+    playerSelectSection.style.display = "none";
+    difficulty.style.display = "block"
 })
 
 selectOptionBtn.addEventListener("click", () =>{
