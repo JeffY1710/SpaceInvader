@@ -29,9 +29,8 @@ export let shootsound = new Audio("assets/sounds/laser.wav");
 export let gameSoundeffect = new Audio("assets/sounds/gamesound.mp3");
 
 const pop = document.querySelector('#pop-up');
-const restart = document.createElement("button");
-const img = document.createElement('img');
-const msg = document.createElement("p");
+const img = document.querySelector('#imgfinal');
+const msg = document.querySelector('#finalscore');
 
 generateGrid();
 let cases = document.querySelectorAll('#grille div');
@@ -42,6 +41,7 @@ const player = new Player(cases, 246);
 gameSoundeffect.play();
 gameSoundeffect.loop= true;
 let canShoot = true;
+
 
 const killAllAlien = function () {
     document.querySelectorAll('#grille div.alien').forEach(cases => {
@@ -78,11 +78,7 @@ const coreGameFunction = function () {
                 setTimeout ( () => {
                     img.src = "../assets/looser.gif";
                     msg.innerText = "GAME OVER \n YOUR SCORE : " + document.querySelector("#score").innerText+"\n WAVE : "+ document.querySelector('#wave').innerText;
-                    restart.innerText = "RESTART"
                     pop.style.display = "block";
-                    pop.appendChild(img);
-                    pop.append(msg); 
-                    pop.append(restart);
                     gameSoundeffect.pause();
                     gameSoundeffect.currentTime = 0;
                     defeatSound.play();

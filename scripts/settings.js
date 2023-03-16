@@ -41,5 +41,10 @@ generalEffect.addEventListener("input", ()=>{
 })
 
 testEffectBtn.addEventListener("click", ()=>{
+    gameSoundeffect.pause()
+    gameSoundeffect.currentTime= 0;
     defeatSound.play()
+    setTimeout(()=>{
+        gameSoundeffect.play()
+    },5000)
 })
