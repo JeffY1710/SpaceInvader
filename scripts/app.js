@@ -2,7 +2,7 @@ import { Player } from "./player.js";
 import { Enemies } from "./enemies.js";
 import { generateGrid, addBorder } from "./generateGrid.js";
 import { gameSound } from "./soundeffect.js";
-import { setCurrentPseudo, setLocalStorageScore } from "./storagescript.js";
+import { setCurrentDifficulty, setCurrentPseudo, setLocalStorageScore } from "./storagescript.js";
 import { generalSoundVolume, gameMusicVolume, generalEffectVolume } from "./settings.js";
 
 if (localStorage.getItem('score') === null) {
@@ -11,6 +11,10 @@ if (localStorage.getItem('score') === null) {
 
 if (localStorage.getItem('pseudo') === null) {
     localStorage.setItem('pseudo', "")
+}
+
+if(localStorage.getItem('difficulty') === null){
+    localStorage.setItem('difficulty', "")
 }
 
 const startButton = document.querySelector('#startGame')
@@ -33,6 +37,9 @@ const backButton = document.querySelectorAll('.back')
 const backMenu = document.querySelector('#backMenu');
 const directRestart = document.querySelector('#directRestart');
 
+const easyButton = document.querySelector('#easy')
+const mediumButton = document.querySelector('#medium')
+const hardButton = document.querySelector('#hard')
 
 let wave = document.querySelector('#wave');
 let score = document.querySelector('#score');
@@ -149,9 +156,34 @@ selectOptionBtn.addEventListener("click", () =>{
     menuSection.style.display = 'none'
 })
 
+
 selectScoreBtn.addEventListener("click", ()=>{
     scoreboardSection.style.display ='flex'
     menuSection.style.display = 'none'
+function deleteTogglebg(){
+    const btns = document.querySelectorAll('#difficulty li')
+    console.log(btns);
+    btns.forEach(e => {
+        e.classList.remove('togglebg')
+    });
+}
+
+easyButton.addEventListener('click',()=>{
+    setCurrentDifficulty('easy');
+    deleteTogglebg();
+    easyButton.classList.add('togglebg');
+})
+
+mediumButton.addEventListener('click',()=>{
+    setCurrentDifficulty('medium');
+    deleteTogglebg();
+    mediumButton.classList.add('togglebg')
+})
+
+hardButton.addEventListener('click',()=>{
+    setCurrentDifficulty('hard');
+    deleteTogglebg();
+    hardButton.classList.add('togglebg')
 })
 
 function resetAll() {

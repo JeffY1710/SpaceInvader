@@ -228,3 +228,18 @@ h4{
                  0px 10px 0 0 #9a5b1c,
                  5px 10px 0 0 #9a5b1c;
 }
+
+.togglebg{
+    background-color: #efd639 !important;
+    color: #1f122e !important;
+    box-shadow:   -4px 0 0 0 #efd639,    
+                 4px 0 0 0 #efd639,
+                 0 -4px 0 0 #efd639,
+                 0 4px 0 0 #efd639,
+
+                 0 4px 0 0 #efd639,
+                 0 4px 0 0 #efd639,
+                 10px 0 0 0 #9a5b1c,
+                 0px 10px 0 0 #9a5b1c,
+                 5px 10px 0 0 #9a5b1c !important;
+}
