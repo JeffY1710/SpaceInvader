@@ -26,4 +26,8 @@ export function setLocalStorageScore(userScore) {
     localStorage.setItem('score', JSON.stringify(convertedCurrentScores));
 }
 
+export function getLocalStorageScore(){
+    return JSON.parse(localStorage.getItem('score'))
+}
+
 
