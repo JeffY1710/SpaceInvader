@@ -2,12 +2,22 @@ import { Player } from "./player.js";
 import { Enemies } from "./enemies.js";
 import { generateGrid, addBorder } from "./generateGrid.js";
 import { gameSound } from "./soundeffect.js";
-
+import { setCurrentPseudo, setLocalStorageScore } from "./storagescript.js";
 import { generalSoundVolume, gameMusicVolume, generalEffectVolume } from "./settings.js";
+
+if (localStorage.getItem('score') === null) {
+    localStorage.setItem('score', "[]")
+}
+
+if (localStorage.getItem('pseudo') === null) {
+    localStorage.setItem('pseudo', "")
+}
 
 const startButton = document.querySelector('#startGame')
 const selectPlayerBtn = document.querySelector('#selectPlayer')
 const playerSelectSection = document.querySelector('#playerSelect')
+const next = document.querySelector('#next');
+const difficulty = document.querySelector('#difficulty')
 
 const selectOptionBtn = document.querySelector('#selectOption')
 const optionSelectSection = document.querySelector('#options')
@@ -79,6 +89,10 @@ const coreGameFunction = function () {
                     img.src = "../assets/looser.gif";
                     msg.innerText = "GAME OVER \n YOUR SCORE : " + document.querySelector("#score").innerText+"\n WAVE : "+ document.querySelector('#wave').innerText;
                     pop.style.display = "block";
+                    setLocalStorageScore(score.innerText)
+                    pop.appendChild(img);
+                    pop.append(msg); 
+                    pop.append(restart);
                     gameSoundeffect.pause();
                     gameSoundeffect.currentTime = 0;
                     defeatSound.play();
@@ -120,6 +134,11 @@ const coreGameFunction = function () {
 selectPlayerBtn.addEventListener("click", () => {
     playerSelectSection.style.display = 'flex'
     menuSection.style.display = 'none'
+})
+
+next.addEventListener('click',()=>{
+    playerSelectSection.style.display = "none";
+    difficulty.style.display = "block"
 })
 
 selectOptionBtn.addEventListener("click", () =>{
@@ -170,6 +189,7 @@ startButton.addEventListener("click", () => {
     gameSection.style.display = 'flex';
     gameSection.style.gap = '50px';
     
+    setCurrentPseudo(document.querySelector("input[name='playerName']").value)
 
     coreGameFunction();
 

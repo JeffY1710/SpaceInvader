@@ -15,7 +15,14 @@ body{
     animation: background-defile 5s linear infinite;
     justify-content: center;
     align-items: center;
-    border: 1px solid grey;
+    border: 1px solid #efd639;
+    box-shadow:   -4px 0 0 0 #efd639,    
+                 4px 0 0 0 #efd639,
+                 0 -4px 0 0 #efd639,
+                 0 4px 0 0 #efd639,
+
+                 0 4px 0 0 #efd639,
+                 0 4px 0 0 #efd639
 }
 
 #pop-up{
@@ -188,3 +195,35 @@ h4{
     background: none;
 }
 
+#difficulty{
+    margin-top: 50px;
+    display: none;
+    width: 75%;
+}
+
+#difficulty ul{
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+}
+
+#difficulty ul li {
+    list-style-type: none;
+}
+
+#difficulty button{
+    margin-top: 50px;
+    background-color: #efd639;
+    color: #1f122e;
+    box-shadow:   -4px 0 0 0 #efd639,    
+                 4px 0 0 0 #efd639,
+                 0 -4px 0 0 #efd639,
+                 0 4px 0 0 #efd639,
+
+                 0 4px 0 0 #efd639,
+                 0 4px 0 0 #efd639,
+                 10px 0 0 0 #9a5b1c,
+                 0px 10px 0 0 #9a5b1c,
+                 5px 10px 0 0 #9a5b1c;
+}
