@@ -181,6 +181,7 @@ selectScoreBtn.addEventListener("click", ()=>{
     menuSection.style.display = 'none'
 })
 
+
 selectCreditsBtn.addEventListener("click", ()=>{
     creditsselect.style.display ='block'
     menuSection.style.display = 'none'
