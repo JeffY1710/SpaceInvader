@@ -31,5 +31,13 @@
     height: 50px; 
     background: #efd639;
     cursor: pointer; 
-  }
+}
+.options__items {
+  width: max-content;
+}
+
+.options__items div button{
+  margin-top: 10px;
+  width: fit-content;
+}
 
