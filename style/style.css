@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 @import url(options.css);
 @import url(scoreboard.css);
+@import url(credits.css);
 body{
     font-family: 'VT323', monospace;
     position: relative;
