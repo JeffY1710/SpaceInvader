@@ -105,6 +105,7 @@ h4{
     transform: rotate(180deg);
     background-position: center;
     background-size: contain;
+    z-index: 9;
 }
 .alien {
     background: url(../assets/ennemies.png);

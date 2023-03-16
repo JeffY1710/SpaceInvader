@@ -23,13 +23,13 @@ const directRestart = document.querySelector('#directRestart');
 
 let wave = document.querySelector('#wave');
 let score = document.querySelector('#score');
+export let defeatSound = new Audio("assets/sounds/game-over.mp3");
+export let explotireur = new Audio("assets/sounds/explotireur.wav");
+export let shootsound = new Audio("assets/sounds/laser.wav");
+export let gameSoundeffect = new Audio("assets/sounds/gamesound.mp3");
 
 const pop = document.querySelector('#pop-up');
 const restart = document.createElement("button");
-const soundgameover = document.createElement("audio");
-export const soundgame = document.querySelector("#mainGameSound");
-const src = document.createElement("source")
-
 const img = document.createElement('img');
 const msg = document.createElement("p");
 
@@ -56,36 +56,24 @@ const killAllLaser = function (){
 
 
 const coreGameFunction = function () {
-
+    // gameSoundeffect.play();    
     let aliens = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
         17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28,
         34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45];
     player.setPlayerShip(246);
     const enemies = new Enemies(cases, aliens)
     enemies.printAliens();
-
+        
     
     const mainGame = setInterval(() => {
+        gameSoundeffect.play();
         restart.setAttribute('id', 'restart');
         if (enemies.verifPlayerDefeat()) {
             playerLose = true
             clearInterval(mainGame);
             if (playerLose) {
-                let deathplayer=document.querySelector('#grille div.alien.tireur')
-                if(deathplayer){
-                    deathplayer.classList.remove('alien');
-                    deathplayer.classList.remove('tireur');
-                    deathplayer.classList.add('explosion');
-                }
-                else{
-                    deathplayer =  document.querySelector('#grille div.tireur')
-                    deathplayer.classList.remove('tireur');
-                    deathplayer.classList.add('explosion');
-                }
-                let deathplayerSound = new Audio("assets/sounds/exploalien.wav");
-                deathplayerSound.volume = generalEffectVolume;
-                deathplayerSound.play();
-                
+                explotireur.play();
+               
                 setTimeout ( () => {
                     img.src = "../assets/looser.gif";
                     src.src = "../assets/sounds/game-over.mp3";
@@ -98,10 +86,10 @@ const coreGameFunction = function () {
                     pop.appendChild(img);
                     pop.append(msg); 
                     pop.append(restart);
-                    pop.append(soundgameover);
-                    soundgame.pause();
-                    soundgame.currentTime = 0;
-                    soundgameover.play();
+                    gameSoundeffect.pause();
+                    gameSoundeffect.currentTime = 0;
+                    defeatSound.play();
+                    
 
                 },500)
 
@@ -165,7 +153,6 @@ restart.addEventListener("click", function () {
     pop.style.display = 'none';
     restartGame();
     resetAll();
-    soundgame.play();
 })
 
 backButton.forEach( (button) => {
@@ -180,6 +167,7 @@ backButton.forEach( (button) => {
 
 startButton.addEventListener("click", () => {
 
+    
     homeSection.style.display = 'none'
     gameSection.style.display = 'flex';
     gameSection.style.gap = '50px';
@@ -192,7 +180,11 @@ startButton.addEventListener("click", () => {
             if (event.code == 'Space' && canShoot) {
                 player.shootMoving();
                 canShoot = !canShoot;
+                
                 setTimeout(() => {
+                    shootsound.play()
+                    shootsound.pause
+                    shootsound.currentTime=0;
                     canShoot = !canShoot
                 }, 250);
             }
