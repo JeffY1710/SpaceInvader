@@ -62,6 +62,7 @@ let playerLose = null;
 const player = new Player(cases, 246);
 
 gameSoundeffect.play();
+gameSoundeffect.autoplay= false;
 gameSoundeffect.loop= true;
 let canShoot = true;
 
