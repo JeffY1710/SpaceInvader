@@ -45,7 +45,12 @@ export class Player {
             laserCase.classList.add('laser');
         }
         setTimeout(() => {
-            laserCase.classList.remove('laser');
+            try {
+                laserCase.classList.remove('laser');
+            } catch (error) {
+                //
+            }
+            
         }, 1000);
     }
 
