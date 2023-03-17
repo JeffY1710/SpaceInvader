@@ -3,6 +3,7 @@ import { Enemies } from "./enemies.js";
 import { generateGrid, addBorder } from "./generateGrid.js";
 import { setCurrentDifficulty, setCurrentPseudo, setLocalStorageScore } from "./storagescript.js";
 import { generalSoundVolume, gameMusicVolume, generalEffectVolume } from "./settings.js";
+import { Meteor } from "./meteorite.js";
 
 if (localStorage.getItem('score') === null) {
     localStorage.setItem('score', "[]")
@@ -15,6 +16,8 @@ if (localStorage.getItem('pseudo') === null) {
 if(localStorage.getItem('difficulty') === null){
     localStorage.setItem('difficulty', "")
 }
+
+
 
 const startButton = document.querySelector('#startGame')
 const selectPlayerBtn = document.querySelector('#selectPlayer')
@@ -61,15 +64,23 @@ addBorder(cases);
 let playerLose = null;
 const player = new Player(cases, 246);
 
+
 gameSoundeffect.play();
 gameSoundeffect.autoplay= false;
 gameSoundeffect.loop= true;
 let canShoot = true;
 
+let meteorSpawnSpeed = 4000;
 
 const killAllAlien = function () {
     document.querySelectorAll('#grille div.alien').forEach(cases => {
         cases.classList.remove("alien")
+    })
+}
+
+const killAllMeteorite = function () {
+    document.querySelectorAll('#grille div.meteorite').forEach(cases => {
+        cases.classList.remove("meteorite")
     })
 }
 
@@ -79,31 +90,53 @@ const killAllLaser = function (){
     })
 }
 
+const spawnMeteorite = ()=>{
+    const meteor = new Meteor();
+    meteor.spawn();
+    const meteorMoves = setInterval(()=>{
+        if (meteor.toStop) {
+            clearInterval(meteorMoves)
+        }else{
+            meteor.move()
+        }
+
+        if (playerLose) {
+            clearInterval(meteorMoves)
+        }
+        
+    },500)
+}
+
 
 const coreGameFunction = function () {
     let defil = document.querySelector('body');
     defil.style.backgroundImage="url('../assets/space-background-2.gif')"
     defil.style.animation= "background-defile 0.25s  linear 0s infinite running";
-      
+    
     let aliens = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
         17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28,
         34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45];
     player.setPlayerShip(246);
     player.setVolume(shootsound.volume)
     const enemies = new Enemies(cases, aliens)
+    
     enemies.printAliens();
 
     if(localStorage.getItem('difficulty') == 'medium'){
         enemies.speed = 500;
     } else if(localStorage.getItem('difficulty') == 'hard'){
         enemies.speed = 250;
-    }   
+    } 
+    
+    const meteoriteCoreFunction = setInterval(()=>{
+        spawnMeteorite()
+    },meteorSpawnSpeed)
     
     const mainGame = setInterval(() => {
-        
         restart.setAttribute('id', 'restart');
         if (enemies.verifPlayerDefeat()) {
             playerLose = true
+            clearInterval(meteoriteCoreFunction)
             clearInterval(mainGame);
             if (playerLose) {
                 explotireur.play();
@@ -130,9 +163,12 @@ const coreGameFunction = function () {
             }
         }
         if (enemies.verifPlayerVictory()) {
+            clearInterval(meteoriteCoreFunction)
             clearInterval(mainGame);
             wave.innerText++;
-            player.shootingSpeed+=50;
+            if (meteorSpawnSpeed - 500 > 1000) {
+                meteorSpawnSpeed -= 500
+            }
             restartGame();
         }
 
@@ -226,6 +262,7 @@ function resetAll() {
 function restartGame() {
     killAllAlien();
     killAllLaser();
+    killAllMeteorite();
     player.removePlayerShip()
     player.setPlayerPos(246);
     coreGameFunction();
@@ -255,7 +292,6 @@ backButton.forEach( (button) => {
 startButton.addEventListener("click", () => {
 
     if(localStorage.getItem('difficulty') == ''){
-        console.log('nul');
     } else{
         gameSoundeffect.pause();
         gameSoundeffect.currentTime=0;
@@ -299,7 +335,7 @@ startButton.addEventListener("click", () => {
                     }
                 }
 
-                if (event.code == 'ArrowUp' && (player.playerPos - 17 > 204)) {
+                if (event.code == 'ArrowUp' && (player.playerPos - 17 > 203)) {
                     player.playerPos -= 17;
                     player.removePlayerShip();
                     player.setPlayerShip(player.playerPos)
@@ -307,7 +343,7 @@ startButton.addEventListener("click", () => {
                 }
 
 
-                if (event.code == 'ArrowDown' && (player.playerPos + 17 < 254)) {
+                if (event.code == 'ArrowDown' && (player.playerPos + 17 < 255)) {
                     player.playerPos += 17;
 
                     player.removePlayerShip();

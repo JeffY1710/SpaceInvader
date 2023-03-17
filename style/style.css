@@ -242,3 +242,11 @@ h4{
                  0px 10px 0 0 #9a5b1c,
                  5px 10px 0 0 #9a5b1c !important;
 }
+
+.meteorite{
+    width: 25px;
+    height: 25px;
+    background-image: url('../assets/meteorite.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}

@@ -65,8 +65,9 @@ export class Enemies{
 
     verifPlayerDefeat() {
         const playerAlien = document.querySelectorAll('div.alien.tireur');
+        const playerMeteorite = document.querySelectorAll('div.meteorite.tireur');
         const alienVictoryLine = document.querySelectorAll("div[data-line='alienvictory'].alien")
-        if(playerAlien.length > 0 || alienVictoryLine.length > 0){
+        if(playerAlien.length > 0 || alienVictoryLine.length > 0 || playerMeteorite.length > 0){
             return true;
         };
     }
