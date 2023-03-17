@@ -96,8 +96,7 @@ const coreGameFunction = function () {
         enemies.speed = 500;
     } else if(localStorage.getItem('difficulty') == 'hard'){
         enemies.speed = 250;
-    }
-        
+    }   
     
     const mainGame = setInterval(() => {
         
@@ -168,6 +167,7 @@ document.querySelector("input[name='playerName']").addEventListener('input', (e)
 next.addEventListener('click',()=>{
     playerSelectSection.style.display = "none";
     difficulty.style.display = "block"
+    setCurrentDifficulty('');
 })
 
 selectOptionBtn.addEventListener("click", () =>{
@@ -253,65 +253,69 @@ backButton.forEach( (button) => {
 
 startButton.addEventListener("click", () => {
 
-    gameSoundeffect.pause();
-    gameSoundeffect.currentTime=0;
-    gameSoundeffect.play();
-    homeSection.style.display = 'none'
-    gameSection.style.display = 'flex';
-    gameSection.style.gap = '50px';
-    
-    setCurrentPseudo(document.querySelector("input[name='playerName']").value)
+    if(localStorage.getItem('difficulty') == ''){
+        console.log('nul');
+    } else{
+        gameSoundeffect.pause();
+        gameSoundeffect.currentTime=0;
+        gameSoundeffect.play();
+        homeSection.style.display = 'none'
+        gameSection.style.display = 'flex';
+        gameSection.style.gap = '50px';
+        
+        setCurrentPseudo(document.querySelector("input[name='playerName']").value)
 
-    coreGameFunction();
+        coreGameFunction();
 
-    window.addEventListener("keyup", (event) => {
-        if (!playerLose) {
-            if (event.code == 'Space' && canShoot) {
-                player.shootMoving();
-                canShoot = !canShoot;
-                
-                setTimeout(() => {
-                    shootsound.play()
-                    shootsound.pause
-                    shootsound.currentTime=0;
-                    canShoot = !canShoot
-                }, 250);
-            }
+        window.addEventListener("keyup", (event) => {
+            if (!playerLose) {
+                if (event.code == 'Space' && canShoot) {
+                    player.shootMoving();
+                    canShoot = !canShoot;
+                    
+                    setTimeout(() => {
+                        shootsound.play()
+                        shootsound.pause
+                        shootsound.currentTime=0;
+                        canShoot = !canShoot
+                    }, 250);
+                }
 
-            if (event.code == 'ArrowRight') {
-                if (!(player.playerCase.getAttribute('data') == 'right')) {
-                    player.playerPos++;
+                if (event.code == 'ArrowRight') {
+                    if (!(player.playerCase.getAttribute('data') == 'right')) {
+                        player.playerPos++;
+                        player.removePlayerShip();
+                        player.setPlayerShip(player.playerPos)
+                    }
+
+                }
+
+                if (event.code == 'ArrowLeft') {
+                    if (!(player.playerCase.getAttribute('data') == 'left')) {
+                        player.playerPos--;
+                        player.removePlayerShip();
+                        player.setPlayerShip(player.playerPos)
+                    }
+                }
+
+                if (event.code == 'ArrowUp' && (player.playerPos - 17 > 204)) {
+                    player.playerPos -= 17;
+                    player.removePlayerShip();
+                    player.setPlayerShip(player.playerPos)
+
+                }
+
+
+                if (event.code == 'ArrowDown' && (player.playerPos + 17 < 254)) {
+                    player.playerPos += 17;
+
                     player.removePlayerShip();
                     player.setPlayerShip(player.playerPos)
                 }
-
             }
 
-            if (event.code == 'ArrowLeft') {
-                if (!(player.playerCase.getAttribute('data') == 'left')) {
-                    player.playerPos--;
-                    player.removePlayerShip();
-                    player.setPlayerShip(player.playerPos)
-                }
-            }
-
-            if (event.code == 'ArrowUp' && (player.playerPos - 17 > 204)) {
-                player.playerPos -= 17;
-                player.removePlayerShip();
-                player.setPlayerShip(player.playerPos)
-
-            }
-
-
-            if (event.code == 'ArrowDown' && (player.playerPos + 17 < 254)) {
-                player.playerPos += 17;
-
-                player.removePlayerShip();
-                player.setPlayerShip(player.playerPos)
-            }
-        }
-
-    })
+        })
+    }
 })
 
 
