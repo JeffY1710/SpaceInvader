@@ -123,14 +123,15 @@ const coreGameFunction = function () {
     enemies.printAliens();
 
     if(localStorage.getItem('difficulty') == 'medium'){
-        enemies.speed = 500;
+        enemies.setSpeed(500);
     } else if(localStorage.getItem('difficulty') == 'hard'){
-        enemies.speed = 250;
+        enemies.setSpeed(250);
     } 
     
     const meteoriteCoreFunction = setInterval(()=>{
         spawnMeteorite()
     },meteorSpawnSpeed)
+
     
     const mainGame = setInterval(() => {
         restart.setAttribute('id', 'restart');
@@ -166,6 +167,7 @@ const coreGameFunction = function () {
             clearInterval(meteoriteCoreFunction)
             clearInterval(mainGame);
             wave.innerText++;
+            
             if (meteorSpawnSpeed - 500 > 1000) {
                 meteorSpawnSpeed -= 500
             }

@@ -7,6 +7,10 @@ export class Enemies{
         this.speed = 1000;
     }
 
+    setSpeed(speed){
+        this.speed = speed;
+    }
+
     printAliens(){
         this.aliens.forEach(e => {
             this.grid[e].classList.add('alien');
