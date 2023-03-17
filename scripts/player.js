@@ -2,7 +2,7 @@
 // 15 hauteur colonnes
 
 // Player Controls
-
+import { wave, waveboss } from "./app.js";
 export class Player {
 
     constructor(grid, playerPos) {
@@ -11,6 +11,7 @@ export class Player {
         this.playerCase = null;
         this.shootingSpeed = 100
         this.volume = 1;
+        this.healthBoss = 30;
     }
 
     setVolume(vol){
@@ -51,6 +52,7 @@ export class Player {
 
     shootMoving() {
         let laserPosMoving = this.playerPos - 17
+        let kilcase = document.querySelectorAll("#grille div.alien")
 
         this.setLaserCase(laserPosMoving)
 
@@ -65,11 +67,28 @@ export class Player {
             if (this.verifKill()) {
                 let caseKill = this.verifKill();
                 clearInterval(shoot)
-                caseKill.classList.remove('alien', 'laser')
-                caseKill.classList.add('explosion')
+                
                 let deathSound = new Audio("assets/sounds/exploalien.wav")
+                
+                
+                if(wave.innerText == waveboss){
+                    // caseKill.classList.remove('laser')
+                    this.healthBoss--
+                    
+                    console.log(kilcase);
+                    if(this.healthBoss <= 0){
+                        kilcase.classList.remove('alien')
+                        deathSound.play()
+                        kilcase.classList.add('explosion')
+                    }
+                    console.log(this.healthBoss);
+                }if(wave.innerText != waveboss){
+                    deathSound.play()
+                    caseKill.classList.remove('alien', 'laser')
+                    caseKill.classList.add('explosion')
+                }
                 deathSound.volume = this.volume
-                deathSound.play()
+                
                 let gameCurrentGrid = this.grid;
                 caseKill.dataset.todelete = Array.prototype.indexOf.call(gameCurrentGrid, caseKill)
             }

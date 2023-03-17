@@ -44,7 +44,8 @@ const easyButton = document.querySelector('#easy')
 const mediumButton = document.querySelector('#medium')
 const hardButton = document.querySelector('#hard')
 
-let wave = document.querySelector('#wave');
+export let wave = document.querySelector('#wave');
+export let waveboss=1;
 let score = document.querySelector('#score');
 export let defeatSound = new Audio("assets/sounds/game-over.mp3");
 export let explotireur = new Audio("assets/sounds/explotireur.wav");
@@ -88,9 +89,23 @@ const coreGameFunction = function () {
     let aliens = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
         17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28,
         34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45];
+
+
+    // let boss = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
+    //     17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28,
+    //     34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45];
     player.setPlayerShip(246);
     player.setVolume(shootsound.volume)
-    const enemies = new Enemies(cases, aliens)
+    const enemies = new Enemies(cases, aliens, )
+    console.log(wave);
+    if(wave.innerText == waveboss ){
+        console.log("test");
+        
+        console.log(waveboss);
+        aliens.splice( 3, 9);
+        aliens.splice( 6, 9);
+        aliens.splice( 9, 9);
+    }
     enemies.printAliens();
 
     if(localStorage.getItem('difficulty') == 'medium'){

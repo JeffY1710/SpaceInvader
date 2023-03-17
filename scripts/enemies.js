@@ -1,3 +1,5 @@
+import { wave, waveboss } from "./app.js";
+
 export class Enemies{
     constructor(grid,aliens){
         this.grid = grid;
@@ -58,7 +60,14 @@ export class Enemies{
         casesToKill.forEach( (cases) => {
             this.aliens = this.aliens.filter( id => id != cases.dataset.todelete)
             cases.removeAttribute('data-todelete');
-            cases.classList.remove('alien', 'explosion', 'laser')
+            if(wave.innerText == waveboss){
+                let kilcase = document.querySelectorAll("#grille .div.alien.laser");
+                kilcase.classList.remove('laser');
+                cases.classList.remove( 'explosion', 'laser');
+            }else{
+                cases.classList.remove('alien', 'explosion', 'laser')
+            }
+            
             this.canScore = true;
         })
     }
